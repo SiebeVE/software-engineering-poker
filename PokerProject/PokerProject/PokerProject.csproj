@@ -46,14 +46,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="cardController.cs" />
+    <Compile Include="cardModel.cs" />
+    <Compile Include="cardView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cardView.Designer.cs">
+      <DependentUpon>cardView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pokerController.cs" />
+    <Compile Include="pokerModel.cs" />
+    <Compile Include="pokerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="pokerView.Designer.cs">
+      <DependentUpon>pokerView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cardView.resx">
+      <DependentUpon>cardView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

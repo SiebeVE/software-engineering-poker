@@ -1,6 +1,6 @@
 ﻿namespace PokerProject
 {
-  partial class Form1
+  partial class pokerView
   {
     /// <summary>
     /// Required designer variable.
