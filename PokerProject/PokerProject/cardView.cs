@@ -14,15 +14,28 @@ namespace PokerProject
   {
     private cardController _controller;
     private cardModel _model;
-    private string cardsPath = "../cardsImages/";
-    private string cardsExtension = ".png";
 
     public cardView(cardController controller)
     {
       _controller = controller;
+      _model = _controller.getModel();
+
       InitializeComponent();
-      var cardName = "back";
-      cardPicture.ImageLocation = cardsPath + cardName + cardsExtension;
+      updateView();
+    }
+
+    public void updateView()
+    {
+      string cardName;
+      if (_model.ShowCard)
+      {
+        cardName = _model.CardName;
+      }
+      else
+      {
+        cardName = "back";
+      }
+      cardPicture.ImageLocation = _model.CardsPath + cardName + _model.CardsExtension;
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
     }
   }

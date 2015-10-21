@@ -13,13 +13,24 @@ namespace PokerProject
 
     public cardController() //constructor
     {
-      _view = new cardView(this);
       _model = new cardModel();
+      _view = new cardView(this);
+      flipCard();
     }
 
     public cardView getView()
     {
       return _view;
+    }
+    public cardModel getModel()
+    {
+      return _model;
+    }
+
+    public void flipCard()
+    {
+      _model.ShowCard = !_model.ShowCard;
+      _view.updateView();
     }
   }
 }
