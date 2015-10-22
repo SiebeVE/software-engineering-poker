@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace PokerProject
 {
-  class pokerModel
+  public class pokerModel
   {
+    private int numberOfPLayers = 1;
+
+    public int NumberOfPLayers
+    {
+      get
+      {
+        return numberOfPLayers;
+      }
+      set
+      {
+        numberOfPLayers = value;
+      }
+    }
   }
 }

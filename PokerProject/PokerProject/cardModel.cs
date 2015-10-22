@@ -10,18 +10,30 @@ namespace PokerProject
   {
     private string cardsPath = "../cardsImages/";
     private string cardsExtension = ".png";
-    private string cardName = "spades8";
+    private string cardKind = "spades";
+    private int cardValue = 13;
     private bool showCard = false;
 
-    public string CardName
+    public string CardKind
     {
       get
       {
-        return cardName;
+        return cardKind;
       }
       set
       {
-        cardName = value;
+        cardKind = value;
+      }
+    }
+    public int CardValue
+    {
+      get
+      {
+        return cardValue;
+      }
+      set
+      {
+        cardValue = value;
       }
     }
     public string CardsExtension
