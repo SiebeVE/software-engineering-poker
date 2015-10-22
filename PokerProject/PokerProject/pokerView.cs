@@ -23,5 +23,21 @@ namespace PokerProject
       //card.initialize();
       Controls.Add(cardView);
     }
-  }
+
+        private void pokerView_Load(object sender, EventArgs e)
+        {
+            // Beginwaarde, hoeveel kaarten er zijn
+          /*  int aantalKaarten = 1; */
+
+            // Alle kaarten in een lijst opvangen
+            List<pokerController> kaarten = new List<pokerController>();
+
+            // Instanties maken van de kaarten
+           /* for (int k_length = 0; k_length < aantalKaarten; ++k_length) {
+
+
+
+            } */
+        }
+    }
 }
