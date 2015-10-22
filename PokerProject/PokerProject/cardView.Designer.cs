@@ -28,27 +28,28 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.cardPicture = new System.Windows.Forms.PictureBox();
-      ((System.ComponentModel.ISupportInitialize)(this.cardPicture)).BeginInit();
-      this.SuspendLayout();
-      // 
-      // cardPicture
-      // 
-      this.cardPicture.Location = new System.Drawing.Point(0, 0);
-      this.cardPicture.Name = "cardPicture";
-      this.cardPicture.Size = new System.Drawing.Size(79, 123);
-      this.cardPicture.TabIndex = 0;
-      this.cardPicture.TabStop = false;
-      // 
-      // cardView
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.cardPicture);
-      this.Name = "cardView";
-      this.Size = new System.Drawing.Size(79, 123);
-      ((System.ComponentModel.ISupportInitialize)(this.cardPicture)).EndInit();
-      this.ResumeLayout(false);
+            this.cardPicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.cardPicture)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // cardPicture
+            // 
+            this.cardPicture.Location = new System.Drawing.Point(0, 0);
+            this.cardPicture.Name = "cardPicture";
+            this.cardPicture.Size = new System.Drawing.Size(79, 123);
+            this.cardPicture.TabIndex = 0;
+            this.cardPicture.TabStop = false;
+            this.cardPicture.Click += new System.EventHandler(this.cardPicture_Click);
+            // 
+            // cardView
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cardPicture);
+            this.Name = "cardView";
+            this.Size = new System.Drawing.Size(79, 123);
+            ((System.ComponentModel.ISupportInitialize)(this.cardPicture)).EndInit();
+            this.ResumeLayout(false);
 
     }
 

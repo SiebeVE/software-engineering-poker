@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="buttonsController.cs" />
+    <Compile Include="buttonsModel.cs" />
+    <Compile Include="buttonsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="buttonsView.Designer.cs">
+      <DependentUpon>buttonsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="cardController.cs" />
     <Compile Include="cardModel.cs" />
     <Compile Include="cardView.cs">
@@ -64,8 +72,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="buttonsView.resx">
+      <DependentUpon>buttonsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cardView.resx">
       <DependentUpon>cardView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pokerView.resx">
+      <DependentUpon>pokerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

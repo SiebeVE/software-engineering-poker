@@ -38,5 +38,10 @@ namespace PokerProject
       cardPicture.ImageLocation = _model.CardsPath + cardName + _model.CardsExtension;
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
     }
-  }
+
+        private void cardPicture_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
