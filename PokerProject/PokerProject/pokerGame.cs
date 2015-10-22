@@ -22,7 +22,7 @@ namespace PokerProject
       pokerController poker = new pokerController();
       pokerView pokerView = poker.getView();
       pokerView.Location = new Point(0, 0);
-      poker.makeCardViews(5);
+      poker.initialize();
       Controls.Add(pokerView);
     }
 
