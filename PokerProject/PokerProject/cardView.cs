@@ -29,7 +29,7 @@ namespace PokerProject
       string cardName;
       if (_model.ShowCard)
       {
-        cardName = _model.CardName;
+        cardName = _model.CardKind + _model.CardValue;
       }
       else
       {
