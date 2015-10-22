@@ -28,9 +28,18 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Text = "Form1";
+            this.SuspendLayout();
+            // 
+            // pokerView
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "pokerView";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.pokerView_Load);
+            this.ResumeLayout(false);
+
     }
 
     #endregion
