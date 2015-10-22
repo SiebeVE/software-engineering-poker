@@ -8,6 +8,7 @@ namespace PokerProject
 {
   public class pokerModel
   {
+    private List<cardController> cards = new List<cardController>();
     private int numberOfPLayers = 1;
 
     public int NumberOfPLayers
@@ -19,6 +20,19 @@ namespace PokerProject
       set
       {
         numberOfPLayers = value;
+      }
+    }
+
+    public void addCard(cardController card)
+    {
+      cards.Add(card);
+    }
+
+    public List<cardController> Cards
+    {
+      get
+      {
+        return cards;
       }
     }
   }

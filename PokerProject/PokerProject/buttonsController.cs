@@ -21,6 +21,11 @@ namespace PokerProject
 
         }
 
+    public buttonsView getView()
+    {
+      return view_buttons;
+    }
+
         // Return de view van de buttons voor le communicatie
         public buttonsView getView_buttons()
         {

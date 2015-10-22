@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,34 +10,39 @@ using System.Windows.Forms;
 
 namespace PokerProject
 {
-  public partial class pokerView : Form
+  public partial class pokerView : UserControl
   {
-    public pokerView()
+    private pokerController _controller;
+
+    public pokerView(pokerController controller)
     {
+      _controller = controller;
       InitializeComponent();
-
-      //toevoegen yathzee
-      cardController card = new cardController();
-      cardView cardView = card.getView();
-      cardView.Location = new Point(0, 0);
-      //card.initialize();
-      Controls.Add(cardView);
     }
 
-        private void pokerView_Load(object sender, EventArgs e)
-        {
-            // Beginwaarde, hoeveel kaarten er zijn
-          /*  int aantalKaarten = 1; */
+    private void pokerView_Load(object sender, EventArgs e)
+    {
+      //toevoegen kaarten
+      List<cardView> cards = _controller.getCardsView(); //Lijst met alle views
+      int cardWidth = cards[0].Width;
+      int cardHeight = cards[0].Height;
+      foreach (cardView card in cards)
+      {
+        cardView currentCard = card;
 
-            // Alle kaarten in een lijst opvangen
-            List<pokerController> kaarten = new List<pokerController>();
+        int xPos = cards.IndexOf(card) * cardWidth; //x positie zetten afhankelijk van index en width
+        currentCard.Location = new Point(xPos, 0);
 
-            // Instanties maken van de kaarten
-           /* for (int k_length = 0; k_length < aantalKaarten; ++k_length) {
+        Controls.Add(currentCard); //huidige teerling toevoegen aan view
 
+        currentCard.updateView();
+      }
 
-
-            } */
-        }
+      //toevoegen knoppen speler
+      buttonsController button = new buttonsController();
+      buttonsView buttonView = button.getView();
+      buttonView.Location = new Point(0, cardHeight + 5);
+      Controls.Add(buttonView);
     }
+  }
 }
