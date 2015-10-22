@@ -24,3 +24,5 @@ C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\projectUpdated
 C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\Les5\projectUpdated\software-engineering-poker-master\PokerProject\PokerProject\bin\Debug\PokerProject.exe.config
 C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\Les5\projectUpdated\software-engineering-poker-master\PokerProject\PokerProject\obj\Debug\PokerProject.exe
 C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\Les5\projectUpdated\software-engineering-poker-master\PokerProject\PokerProject\obj\Debug\PokerProject.pdb
+C:\Users\Siebe\Documents\_School\01_Periode\Software Engineering\_PokerProject\PokerProject\PokerProject\obj\Debug\PokerProject.buttonsView.resources
+C:\Users\Siebe\Documents\_School\01_Periode\Software Engineering\_PokerProject\PokerProject\PokerProject\obj\Debug\PokerProject.pokerView.resources
