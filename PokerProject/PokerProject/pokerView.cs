@@ -36,11 +36,14 @@ namespace PokerProject
       }
 
       //toevoegen view van flop, turn, river, total pot
+      playerController flop = new playerController(_controller, 5);
+      playerView flopView = flop.getViewPlayer();
+      flopView.Location = new Point(280, 20);
+      Controls.Add(flopView);
 
       //toevoegen knoppen speler
       buttonsController button = new buttonsController();
       buttonsView buttonView = button.getViewButtons();
-      int test = buttonView.Width;
       buttonView.Location = new Point(320, 600);
       Controls.Add(buttonView);
     }

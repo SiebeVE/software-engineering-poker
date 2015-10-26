@@ -10,7 +10,12 @@ namespace PokerProject
   {
     private List<cardController> cards = new List<cardController>();
 
-    private int numberOfCards = 2;
+    private int numberOfCards;
+
+    public playerModel(int nrOfCards)
+    {
+      numberOfCards = nrOfCards;
+    }
 
     public int NumberOfCards
     {

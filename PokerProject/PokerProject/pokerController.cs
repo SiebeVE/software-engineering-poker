@@ -96,7 +96,7 @@ namespace PokerProject
     {
       for (int playerNr = 0; playerNr < numberOfPlayers; playerNr++)
       {
-        playerController player = new playerController(this); //Enkele player aanmaken met injectie van hoofdcontroller
+        playerController player = new playerController(this, 2); //Enkele player aanmaken met injectie van hoofdcontroller
         playerView playerView = player.getViewPlayer(); //Nieuwe view player
         _model.addPlayer(player); //toevoegen speler aan lijst
       }

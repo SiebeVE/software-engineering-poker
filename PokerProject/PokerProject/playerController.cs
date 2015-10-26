@@ -12,10 +12,10 @@ namespace PokerProject
     private playerModel _model;
     private pokerController _controllerPoker;
 
-    public playerController(pokerController controllerPoker)
+    public playerController(pokerController controllerPoker, int numberOfCards)
     {
       _controllerPoker = controllerPoker;
-      _model = new playerModel();
+      _model = new playerModel(numberOfCards);
       makeCardViews(_model.NumberOfCards);
       _view = new playerView(this);
     }
