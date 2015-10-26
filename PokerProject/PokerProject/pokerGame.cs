@@ -20,7 +20,7 @@ namespace PokerProject
     private void pokerView_Load(object sender, EventArgs e)
     {
       pokerController poker = new pokerController();
-      pokerView pokerView = poker.getView();
+      pokerView pokerView = poker.getViewPoker();
       pokerView.Location = new Point(0, 0);
       poker.initialize();
       Controls.Add(pokerView);

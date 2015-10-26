@@ -1,6 +1,6 @@
 ﻿namespace PokerProject
 {
-  partial class pokerView
+  partial class playerView
   {
     /// <summary> 
     /// Required designer variable.
@@ -30,14 +30,14 @@
     {
       this.SuspendLayout();
       // 
-      // pokerView
+      // playerView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSize = true;
-      this.BackColor = System.Drawing.SystemColors.HotTrack;
-      this.Name = "pokerView";
-      this.Load += new System.EventHandler(this.pokerView_Load);
+      this.BackColor = System.Drawing.SystemColors.GrayText;
+      this.Name = "playerView";
+      this.Load += new System.EventHandler(this.playerView_Load);
       this.ResumeLayout(false);
 
     }

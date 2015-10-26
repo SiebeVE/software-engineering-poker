@@ -22,26 +22,23 @@ namespace PokerProject
 
     private void pokerView_Load(object sender, EventArgs e)
     {
-      //toevoegen kaarten
-      List<cardView> cards = _controller.getCardsView(); //Lijst met alle views
-      int cardWidth = cards[0].Width;
-      int cardHeight = cards[0].Height;
-      foreach (cardView card in cards)
+      //toevoegen views van spelers
+      List<playerView> players = _controller.getViewsPlayers();
+      foreach (playerView player in players)
       {
-        cardView currentCard = card;
+        playerView currentPlayer = player;
 
-        int xPos = cards.IndexOf(card) * cardWidth; //x positie zetten afhankelijk van index en width
-        currentCard.Location = new Point(xPos, 0);
+        currentPlayer.Location = new Point(0, 0);
 
-        Controls.Add(currentCard); //huidige teerling toevoegen aan view
-
-        currentCard.updateView();
+        Controls.Add(currentPlayer);
       }
+
+      //toevoegen view van flop, turn, river, total pot
 
       //toevoegen knoppen speler
       buttonsController button = new buttonsController();
-      buttonsView buttonView = button.getView();
-      buttonView.Location = new Point(0, cardHeight + 5);
+      buttonsView buttonView = button.getViewButtons();
+      buttonView.Location = new Point(0, 200 + 5);
       Controls.Add(buttonView);
     }
   }

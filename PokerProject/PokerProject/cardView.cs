@@ -18,7 +18,7 @@ namespace PokerProject
     public cardView(cardController controller)
     {
       _controller = controller;
-      _model = _controller.getModel();
+      _model = _controller.getModelCard();
 
       InitializeComponent();
       updateView();

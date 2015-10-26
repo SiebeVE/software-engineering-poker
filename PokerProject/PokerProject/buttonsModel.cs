@@ -6,97 +6,105 @@ using System.Threading.Tasks;
 
 namespace PokerProject
 {
-    class buttonsModel
+  class buttonsModel
+  {
+
+    private int gegevenChips;
+    private int teBetalenChips;
+    private int chipsPersoon;
+    // geen all-in button, gaat ook adhv deze variabele (denk ik)
+
+    private bool isButtonClicked;
+
+    public buttonsModel()
     {
 
-        private int gegevenChips;
-        private int teBetalenChips;
-        private int chipsPersoon;
-        // geen all-in button, gaat ook adhv deze variabele (denk ik)
+      chipsPersoon = 500;
+      gegevenChips = 0;
 
-        private bool isButtonClicked;
+      isButtonClicked = false;
 
-        public buttonsModel() {
+      /*
+          Code voor de teBetalenChips telkens te verhogen bij elke ronde + extra te verhogen bij Raise()
+      */
 
-            chipsPersoon    = 500;
-            gegevenChips    = 0;
+    }
 
-            isButtonClicked = false;
+    public void Call()
+    {
 
-            /*
-                Code voor de teBetalenChips telkens te verhogen bij elke ronde + extra te verhogen bij Raise()
-            */
+      gegevenChips = teBetalenChips;
 
-        }
+    }
 
-        public void Call() {
+    public void Fold()
+    {
 
-            gegevenChips = teBetalenChips;
-
-        }
-
-        public void Fold() {
-
-            gegevenChips = 0;
-            teBetalenChips = 0;
-
-
-        }
-
-        public void Raise() {
-
-            gegevenChips = teBetalenChips * 2;
-
-        }
-
-        public void ButtonIsClicked() {
-
-            isButtonClicked = !isButtonClicked;
-
-        }
-
-        /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-        *                G  E  T  T  E  R  S                 *
-
-        * * * * * * * * * * * * * * * * * * * * * * * * * *  */
-        public int ChipsPersoon
-        {
-
-            get
-            {
-                return chipsPersoon;
-            }
-
-        }
-
-        public int TeBetalenChips {
-
-            get
-            {
-                return teBetalenChips;
-            }
-
-        }
-
-        public int GegevenChips {
-
-            get
-            {
-                return gegevenChips;
-            }
-
-        }
-
-        public bool ButtonClicked {
-
-            get
-            {
-                return isButtonClicked;
-            }
-
-        }
+      gegevenChips = 0;
+      teBetalenChips = 0;
 
 
     }
+
+    public void Raise()
+    {
+
+      gegevenChips = teBetalenChips * 2;
+
+    }
+
+    public void ButtonIsClicked()
+    {
+
+      isButtonClicked = !isButtonClicked;
+
+    }
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+    *                G  E  T  T  E  R  S                 *
+
+    * * * * * * * * * * * * * * * * * * * * * * * * * *  */
+    public int ChipsPersoon
+    {
+
+      get
+      {
+        return chipsPersoon;
+      }
+
+    }
+
+    public int TeBetalenChips
+    {
+
+      get
+      {
+        return teBetalenChips;
+      }
+
+    }
+
+    public int GegevenChips
+    {
+
+      get
+      {
+        return gegevenChips;
+      }
+
+    }
+
+    public bool ButtonClicked
+    {
+
+      get
+      {
+        return isButtonClicked;
+      }
+
+    }
+
+
+  }
 }

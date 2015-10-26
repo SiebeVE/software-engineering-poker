@@ -18,11 +18,11 @@ namespace PokerProject
       flipCard();
     }
 
-    public cardView getView()
+    public cardView getViewCard()
     {
       return _view; //view toegankelijk maken voor pokerView
     }
-    public cardModel getModel()
+    public cardModel getModelCard()
     {
       return _model; //model toegankelijk maken voor view
     }

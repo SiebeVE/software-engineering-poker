@@ -62,6 +62,14 @@
     <Compile Include="cardView.Designer.cs">
       <DependentUpon>cardView.cs</DependentUpon>
     </Compile>
+    <Compile Include="playerController.cs" />
+    <Compile Include="playerModel.cs" />
+    <Compile Include="playerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="playerView.Designer.cs">
+      <DependentUpon>playerView.cs</DependentUpon>
+    </Compile>
     <Compile Include="pokerController.cs" />
     <Compile Include="pokerModel.cs" />
     <Compile Include="pokerGame.cs">
@@ -83,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="cardView.resx">
       <DependentUpon>cardView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="playerView.resx">
+      <DependentUpon>playerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pokerGame.resx">
       <DependentUpon>pokerGame.cs</DependentUpon>
