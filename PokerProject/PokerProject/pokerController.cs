@@ -33,7 +33,7 @@ namespace PokerProject
     public void initialize()
     {
       makeDeck();
-      createViewsPlayers(1);
+      createViewsPlayers(_model.NumberOfPlayers);
     }
 
     public List<playerView> getViewsPlayers()
@@ -94,9 +94,12 @@ namespace PokerProject
     }
     public void createViewsPlayers(int numberOfPlayers)
     {
-      playerController player = new playerController(this); //Enkele player aanmaken met injectie van hoofdcontroller
-      playerView playerView = player.getViewPlayer(); //Nieuwe view player
-      _model.addPlayer(player); //toevoegen speler aan lijst
+      for (int playerNr = 0; playerNr < numberOfPlayers; playerNr++)
+      {
+        playerController player = new playerController(this); //Enkele player aanmaken met injectie van hoofdcontroller
+        playerView playerView = player.getViewPlayer(); //Nieuwe view player
+        _model.addPlayer(player); //toevoegen speler aan lijst
+      }
     }
   }
 }

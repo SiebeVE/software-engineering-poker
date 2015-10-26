@@ -14,10 +14,10 @@ namespace PokerProject
 
     private List<playerController> players = new List<playerController>();
 
-    private int numberOfPLayers = 1;
+    private int numberOfPLayers = 6;
     private int maxPlayers = 6;
 
-    public int NumberOfPLayers
+    public int NumberOfPlayers
     {
       get
       {

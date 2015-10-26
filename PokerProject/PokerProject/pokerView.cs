@@ -24,13 +24,15 @@ namespace PokerProject
     {
       //toevoegen views van spelers
       List<playerView> players = _controller.getViewsPlayers();
+      List<int> xPos = new List<int>(new int[] { 20,780,160,640,300,500 });
+      List<int> yPos = new List<int>(new int[] { 20,20,210,210,400,400, });
+      int curPlayerIndex = 0;
       foreach (playerView player in players)
       {
         playerView currentPlayer = player;
-
-        currentPlayer.Location = new Point(0, 0);
-
+        currentPlayer.Location = new Point(xPos[curPlayerIndex], yPos[curPlayerIndex]);
         Controls.Add(currentPlayer);
+        curPlayerIndex++;
       }
 
       //toevoegen view van flop, turn, river, total pot
@@ -38,7 +40,8 @@ namespace PokerProject
       //toevoegen knoppen speler
       buttonsController button = new buttonsController();
       buttonsView buttonView = button.getViewButtons();
-      buttonView.Location = new Point(0, 200 + 5);
+      int test = buttonView.Width;
+      buttonView.Location = new Point(320, 600);
       Controls.Add(buttonView);
     }
   }
