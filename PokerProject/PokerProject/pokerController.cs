@@ -13,7 +13,7 @@ namespace PokerProject
     private List<string> cardsStackKind = new List<string>();
     private List<int> cardsStackValue = new List<int>();
 
-    static int seeder = 0; //nodig omdat anders random getal altijd hetzelfde is
+    static int seeder = new Random().Next(); //nodig omdat anders random getal altijd hetzelfde is
     Random random = new Random(++seeder); //random getal genereren
 
     public pokerController() //constructor
@@ -84,7 +84,7 @@ namespace PokerProject
             currentKind = "none";
             break;
         }
-        for (int valueCount = 0; valueCount < 13; valueCount++)
+        for (int valueCount = 2; valueCount <= 14; valueCount++)
         {
           //toevoegen aan lijsten
           tempKind.Add(currentKind);
@@ -94,7 +94,7 @@ namespace PokerProject
       int currentCardIndex = 0;
       while (currentCardIndex < tempValue.Count)
       {
-        int randomIndex = random.Next(0, tempValue.Count); //random tussen 1 en en aantal elementen in temp lijst
+        int randomIndex = random.Next(0, (tempValue.Count-1)); //random tussen 1 en en aantal elementen in temp lijst
         cardsStackKind.Add(tempKind[randomIndex]); //random item soort toevoegen aan lijst
         cardsStackValue.Add(tempValue[randomIndex]); //random value soort toevoegen aan lijst
         tempKind.RemoveAt(randomIndex); //verwijderen uit temp lijsten
