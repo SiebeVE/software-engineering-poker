@@ -9,20 +9,27 @@ namespace PokerProject
   class buttonsModel
   {
 
-    private int gegevenChips;
-    private int teBetalenChips;
-    private int chipsPersoon;
-    // geen all-in button, gaat ook adhv deze variabele (denk ik)
+    //private int alGegevenChips;
+    //private int teBetalenChips;
+    private int startKapitaal;
+    private int kapitaal;
 
-    private bool isButtonClicked;
+    private int smallBlind;
+    private int BigBlind;
+
+    private int momenteleInzet;
+    private int inzetPot;
+
+
+    // geen all-in button, gaat ook adhv deze variabele (denk ik)
 
     public buttonsModel()
     {
 
-      chipsPersoon = 500;
-      gegevenChips = 0;
+      startKapitaal = 500;
 
-      isButtonClicked = false;
+
+
 
       /*
           Code voor de teBetalenChips telkens te verhogen bij elke ronde + extra te verhogen bij Raise()
@@ -33,32 +40,45 @@ namespace PokerProject
     public void Call()
     {
 
-      gegevenChips = teBetalenChips;
+      if (momenteleInzet < inzetPot)
+      {    //momentele inzet is kleiner als de inzet de pot
+
+        momenteleInzet = inzetPot;                       // momentele inzet is gelijk aan de inzet in de pot
+        kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
+
+      }
+      else
+      {
+
+        // call button --> check button
+
+      }
 
     }
 
     public void Fold()
     {
 
-      gegevenChips = 0;
-      teBetalenChips = 0;
+      kapitaal = startKapitaal - momenteleInzet;
 
+      // hand weggooien
 
     }
 
     public void Raise()
     {
 
-      gegevenChips = teBetalenChips * 2;
+      if (momenteleInzet <= inzetPot)
+      {    //momentele inzet is kleiner of gelijk aan als de inzet de pot
+
+        momenteleInzet = inzetPot + BigBlind;            // momentele inzet is gelijk aan de inzet in de pot + big blind
+        kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
+
+      }
 
     }
 
-    public void ButtonIsClicked()
-    {
 
-      isButtonClicked = !isButtonClicked;
-
-    }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -70,7 +90,7 @@ namespace PokerProject
 
       get
       {
-        return chipsPersoon;
+        return startKapitaal;
       }
 
     }
@@ -80,7 +100,7 @@ namespace PokerProject
 
       get
       {
-        return teBetalenChips;
+        return 1;
       }
 
     }
@@ -90,7 +110,7 @@ namespace PokerProject
 
       get
       {
-        return gegevenChips;
+        return 1;
       }
 
     }
@@ -100,7 +120,7 @@ namespace PokerProject
 
       get
       {
-        return isButtonClicked;
+        return true;
       }
 
     }
