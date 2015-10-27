@@ -14,7 +14,7 @@ namespace PokerProject
 
     private List<playerController> players = new List<playerController>();
 
-    private int numberOfPLayers = 6;
+    private int numberOfPLayers = 3;
     private int maxPlayers = 6;
 
     public int NumberOfPlayers

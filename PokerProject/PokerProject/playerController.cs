@@ -50,7 +50,7 @@ namespace PokerProject
     {
       for (int cardNumber = 0; cardNumber < numberOfCards; cardNumber++)
       {
-        cardController card = new cardController(); //Enkele kaart aanmaken
+        cardController card = new cardController(this); //Enkele kaart aanmaken
         cardView cardView = card.getViewCard(); //Nieuwe view kaart
         _model.addCard(card); //kaart toevoegen aan lijst
 

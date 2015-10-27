@@ -31,6 +31,10 @@ namespace PokerProject
       {
         cardName = _model.CardKind + _model.CardValue;
       }
+      else if (_controller.getControllerPlayer().getModelPlayer().Folded)
+      {
+        cardName = "fold";
+      }
       else
       {
         cardName = "back";

@@ -11,6 +11,8 @@ namespace PokerProject
     private List<cardController> cards = new List<cardController>();
 
     private int numberOfCards;
+    private bool folded = true;
+    private int momentelInzet = 0;
 
     public playerModel(int nrOfCards)
     {
@@ -35,6 +37,30 @@ namespace PokerProject
       get
       {
         return cards;
+      }
+    }
+
+    public bool Folded
+    {
+      get
+      {
+        return folded;
+      }
+      set
+      {
+        folded = value;
+      }
+    }
+
+    public int MomentelInzet
+    {
+      get
+      {
+        return momentelInzet;
+      }
+      set
+      {
+        momentelInzet = value;
       }
     }
 
