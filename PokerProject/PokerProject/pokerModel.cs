@@ -13,6 +13,7 @@ namespace PokerProject
     private List<int> cardsStackValue = new List<int>();
 
     private List<playerController> players = new List<playerController>();
+    private playerController flopController;
 
     private int numberOfPLayers = 3;
     private int maxPlayers = 6;
@@ -26,6 +27,18 @@ namespace PokerProject
       set
       {
         numberOfPLayers = value;
+      }
+    }
+
+    public playerController FlopController
+    {
+      get
+      {
+        return flopController;
+      }
+      set
+      {
+        flopController = value;
       }
     }
 

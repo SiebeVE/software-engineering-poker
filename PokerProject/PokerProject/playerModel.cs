@@ -9,6 +9,7 @@ namespace PokerProject
   public class playerModel
   {
     private List<cardController> cards = new List<cardController>();
+    
 
     private int numberOfCards;
     private bool folded = true;

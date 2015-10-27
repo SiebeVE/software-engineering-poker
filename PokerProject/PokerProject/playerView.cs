@@ -35,6 +35,19 @@ namespace PokerProject
 
         currentCard.updateView();
       }
+      int height = this.PreferredSize.Height - kapitaal.PreferredHeight - 7;
+      int width;
+      if (_controller == _controller.getControllerPoker().getModelPoker().FlopController)
+      {
+        width = 50;
+        kapitaal.Text = "Totaalpot: € 99";
+      }
+      else
+      {
+        width = 40;
+        kapitaal.Text = "Uw kapitaal: € 99";
+      }
+      kapitaal.Location = new Point(width, height);
     }
   }
 }

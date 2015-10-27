@@ -37,6 +37,7 @@ namespace PokerProject
 
       //toevoegen view van flop, turn, river, total pot
       playerController flop = new playerController(_controller, 5);
+      _controller.getModelPoker().FlopController = flop;
       playerView flopView = flop.getViewPlayer();
       flopView.Location = new Point(280, 20);
       Controls.Add(flopView);
