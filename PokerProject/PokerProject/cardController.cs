@@ -10,26 +10,39 @@ namespace PokerProject
   {
     private cardView _view;
     private cardModel _model;
+    private playerController _controllerPlayer;
 
-    public cardController() //constructor
+    public cardController(playerController controller) //constructor
     {
+      _controllerPlayer = controller;
       _model = new cardModel();
       _view = new cardView(this); //controller injecteren in view voor 2 richtingsverkeer
       flipCard();
     }
 
-    public cardView getView()
+    public cardView getViewCard()
     {
       return _view; //view toegankelijk maken voor pokerView
     }
-    public cardModel getModel()
+    public cardModel getModelCard()
     {
       return _model; //model toegankelijk maken voor view
+    }
+
+    public playerController getControllerPlayer()
+    {
+      return _controllerPlayer; //controller toegankelijk maken voor view
     }
 
     public void flipCard()
     {
       _model.ShowCard = !_model.ShowCard; // omdraaien van kaard
+      _view.updateView(); // updaten van view
+    }
+
+    public void foldCard()
+    {
+      _model.ShowCard = !_model.ShowCard; // omdraaien van kaart
       _view.updateView(); // updaten van view
     }
 

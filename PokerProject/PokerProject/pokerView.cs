@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,34 +10,42 @@ using System.Windows.Forms;
 
 namespace PokerProject
 {
-  public partial class pokerView : Form
+  public partial class pokerView : UserControl
   {
-    public pokerView()
+    private pokerController _controller;
+
+    public pokerView(pokerController controller)
     {
+      _controller = controller;
       InitializeComponent();
-
-      //toevoegen yathzee
-      cardController card = new cardController();
-      cardView cardView = card.getView();
-      cardView.Location = new Point(0, 0);
-      //card.initialize();
-      Controls.Add(cardView);
     }
 
-        private void pokerView_Load(object sender, EventArgs e)
-        {
-            // Beginwaarde, hoeveel kaarten er zijn
-          /*  int aantalKaarten = 1; */
+    private void pokerView_Load(object sender, EventArgs e)
+    {
+      //toevoegen views van spelers
+      List<playerView> players = _controller.getViewsPlayers();
+      List<int> xPos = new List<int>(new int[] { 20,780,160,640,300,500 });
+      List<int> yPos = new List<int>(new int[] { 20,20,210,210,400,400, });
+      int curPlayerIndex = 0;
+      foreach (playerView player in players)
+      {
+        playerView currentPlayer = player;
+        currentPlayer.Location = new Point(xPos[curPlayerIndex], yPos[curPlayerIndex]);
+        Controls.Add(currentPlayer);
+        curPlayerIndex++;
+      }
 
-            // Alle kaarten in een lijst opvangen
-            List<pokerController> kaarten = new List<pokerController>();
+      //toevoegen view van flop, turn, river, total pot
+      playerController flop = new playerController(_controller, 5);
+      playerView flopView = flop.getViewPlayer();
+      flopView.Location = new Point(280, 20);
+      Controls.Add(flopView);
 
-            // Instanties maken van de kaarten
-           /* for (int k_length = 0; k_length < aantalKaarten; ++k_length) {
-
-
-
-            } */
-        }
+      //toevoegen knoppen speler
+      buttonsController button = new buttonsController();
+      buttonsView buttonView = button.getViewButtons();
+      buttonView.Location = new Point(320, 600);
+      Controls.Add(buttonView);
     }
+  }
 }
