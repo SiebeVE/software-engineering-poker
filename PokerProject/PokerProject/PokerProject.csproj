@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="buttonsController.cs" />
+    <Compile Include="buttonsModel.cs" />
+    <Compile Include="buttonsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="buttonsView.Designer.cs">
+      <DependentUpon>buttonsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="cardController.cs" />
     <Compile Include="cardModel.cs" />
     <Compile Include="cardView.cs">
@@ -54,18 +62,41 @@
     <Compile Include="cardView.Designer.cs">
       <DependentUpon>cardView.cs</DependentUpon>
     </Compile>
+    <Compile Include="playerController.cs" />
+    <Compile Include="playerModel.cs" />
+    <Compile Include="playerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="playerView.Designer.cs">
+      <DependentUpon>playerView.cs</DependentUpon>
+    </Compile>
     <Compile Include="pokerController.cs" />
     <Compile Include="pokerModel.cs" />
-    <Compile Include="pokerView.cs">
+    <Compile Include="pokerGame.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pokerGame.Designer.cs">
+      <DependentUpon>pokerGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pokerView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="pokerView.Designer.cs">
       <DependentUpon>pokerView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="buttonsView.resx">
+      <DependentUpon>buttonsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cardView.resx">
       <DependentUpon>cardView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="playerView.resx">
+      <DependentUpon>playerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pokerGame.resx">
+      <DependentUpon>pokerGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pokerView.resx">
       <DependentUpon>pokerView.cs</DependentUpon>

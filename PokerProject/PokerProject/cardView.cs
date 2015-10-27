@@ -18,7 +18,7 @@ namespace PokerProject
     public cardView(cardController controller)
     {
       _controller = controller;
-      _model = _controller.getModel();
+      _model = _controller.getModelCard();
 
       InitializeComponent();
       updateView();
@@ -31,6 +31,10 @@ namespace PokerProject
       {
         cardName = _model.CardKind + _model.CardValue;
       }
+      else if (_controller.getControllerPlayer().getModelPlayer().Folded)
+      {
+        cardName = "fold";
+      }
       else
       {
         cardName = "back";
@@ -39,9 +43,9 @@ namespace PokerProject
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
     }
 
-        private void cardPicture_Click(object sender, EventArgs e)
-        {
+    private void cardPicture_Click(object sender, EventArgs e)
+    {
 
-        }
     }
+  }
 }
