@@ -57,11 +57,7 @@ namespace PokerProject
       {
         //beginnen for loop met soort kiezen
         string currentKind;
-<<<<<<< HEAD
-        switch (kindCount)
-=======
         switch(kindCount)
->>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
         {
           case 0:
             currentKind = "hearts";
@@ -89,11 +85,7 @@ namespace PokerProject
       int currentCardIndex = 0;
       while (currentCardIndex < tempValue.Count)
       {
-<<<<<<< HEAD
-        int randomIndex = random.Next(0, (tempValue.Count - 1)); //random tussen 1 en en aantal elementen in temp lijst
-=======
         int randomIndex = random.Next(0, (tempValue.Count-1)); //random tussen 1 en en aantal elementen in temp lijst
->>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
         _model.addCardKind(tempKind[randomIndex]); //random item soort toevoegen aan lijst
         _model.addCardValue(tempValue[randomIndex]); //random value soort toevoegen aan lijst
         tempKind.RemoveAt(randomIndex); //verwijderen uit temp lijsten
