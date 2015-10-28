@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PokerProject
+<<<<<<< HEAD
 {
   class buttonsModel
   {
@@ -42,18 +43,34 @@ namespace PokerProject
 
       if (momenteleInzet < inzetPot)
       {    //momentele inzet is kleiner als de inzet de pot
+=======
+{ 
+
+  class buttonsModel
+  {
+  
+        private playerModel currentPlayer;
+        private playerModel bigPot;
+>>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
 
         momenteleInzet = inzetPot;                       // momentele inzet is gelijk aan de inzet in de pot
         kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
 
+<<<<<<< HEAD
       }
       else
       {
 
         // call button --> check button
+=======
+            
+            
+        }
+>>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
 
       }
 
+<<<<<<< HEAD
     }
 
     public void Fold()
@@ -62,9 +79,14 @@ namespace PokerProject
       kapitaal = startKapitaal - momenteleInzet;
 
       // hand weggooien
+=======
+     
+        }
+>>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
 
     }
 
+<<<<<<< HEAD
     public void Raise()
     {
 
@@ -75,9 +97,13 @@ namespace PokerProject
         kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
 
       }
+=======
+      
+>>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
 
     }
 
+<<<<<<< HEAD
 
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -126,5 +152,11 @@ namespace PokerProject
     }
 
 
+=======
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                G  E  T  T  E  R  S                 *
+    * * * * * * * * * * * * * * * * * * * * * * * * * *  */
+    
+>>>>>>> 10faf2f6086d676849d05360c67cfe09998dca69
   }
 }
