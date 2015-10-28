@@ -34,10 +34,10 @@ namespace PokerProject
 
       model_buttons.Call();
 
-      //Update de view met de nieuwe waarde
-      view_buttons.updateUI();
+            //Update de view met de nieuwe waarde
+            view_buttons.updateUIButton();
 
-    }
+        }
 
     /*
         Passen, je hand weggooien. Men verliest hierbij de kans om de pot te winnen.
@@ -47,8 +47,8 @@ namespace PokerProject
 
       model_buttons.Fold();
 
-      //Update de view met de nieuwe waarde
-      view_buttons.updateUI();
+            //Update de view met de nieuwe waarde
+            
 
     }
 
@@ -61,7 +61,7 @@ namespace PokerProject
       model_buttons.Raise();
 
       //Update de view met de nieuwe waarde
-      view_buttons.updateUI();
+      view_buttons.updateUIAllin();
 
     }
 
@@ -73,22 +73,14 @@ namespace PokerProject
 
     *   *   *   *   *  Returns de waarde  *   *   *   *  */
 
-    public int ChipsPersoon
-    {
+    
+
+    /* public int Kapitaal
+        {
 
       get
       {
-        return model_buttons.ChipsPersoon;
-      }
-
-    }
-
-    public int TeBetalenChips
-    {
-
-      get
-      {
-        return model_buttons.TeBetalenChips;
+        return model_buttons.Kapitaal;
       }
 
     }
@@ -103,15 +95,7 @@ namespace PokerProject
 
     }
 
-    public bool ButtonClicked
-    {
-
-      get
-      {
-        return model_buttons.ButtonClicked;
-      }
-
-    }
+    */
 
   }
 

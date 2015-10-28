@@ -28,3 +28,16 @@ C:\Users\Siebe\Documents\_School\01_Periode\Software Engineering\_PokerProject\P
 C:\Users\Siebe\Documents\_School\01_Periode\Software Engineering\_PokerProject\PokerProject\PokerProject\obj\Debug\PokerProject.pokerView.resources
 C:\Users\Siebe\Documents\_School\01_Periode\Software Engineering\_PokerProject\PokerProject\PokerProject\obj\Debug\PokerProject.pokerGame.resources
 C:\Users\Siebe\Documents\_School\01_Periode\Software Engineering\_PokerProject\PokerProject\PokerProject\obj\Debug\PokerProject.playerView.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\bin\Debug\PokerProject.exe.config
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.exe
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.pdb
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\bin\Debug\PokerProject.exe
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\bin\Debug\PokerProject.pdb
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.csprojResolveAssemblyReference.cache
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.buttonsView.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.cardView.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.playerView.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.pokerGame.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.pokerView.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.Properties.Resources.resources
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.csproj.GenerateResource.Cache

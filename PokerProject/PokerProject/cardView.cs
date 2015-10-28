@@ -43,9 +43,9 @@ namespace PokerProject
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
     }
 
-        private void cardPicture_Click(object sender, EventArgs e)
-        {
+    private void cardPicture_Click(object sender, EventArgs e)
+    {
 
-        }
     }
+  }
 }

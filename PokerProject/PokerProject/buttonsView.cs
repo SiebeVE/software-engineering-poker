@@ -25,7 +25,6 @@ namespace PokerProject
       // Ken de controller injection toe aan de member
       controller = bttncontroller;
     }
-
     private void buttonView_Load(object sender, EventArgs e)
     {
 
@@ -47,9 +46,17 @@ namespace PokerProject
       controller.Fold();
     }
 
-    public void updateUI()
-    {
+        public void updateUIButton() {
+            Inzet.Text = "Check";
 
+        }
+        public void updateUIAllin() {
+            raise_bttn.Text = "All in";
+
+        }
+
+        private void Inzet_Click(object sender, EventArgs e)
+        {
 
     }
   }
