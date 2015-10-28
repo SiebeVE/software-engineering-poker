@@ -9,6 +9,7 @@ namespace PokerProject
   public class playerModel
   {
     private List<cardController> cards = new List<cardController>();
+    
 
         private playerController currentPlayer;
         private buttonsView view_button;
