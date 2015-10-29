@@ -15,7 +15,7 @@ namespace PokerProject
     public playerController(pokerController controllerPoker, int numberOfCards)
     {
       _controllerPoker = controllerPoker;
-      _model = new playerModel(numberOfCards);
+      _model = new playerModel(numberOfCards, this);
       makeCardViews(_model.NumberOfCards);
       _view = new playerView(this);
     }
