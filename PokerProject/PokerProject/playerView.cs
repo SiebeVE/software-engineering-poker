@@ -35,19 +35,58 @@ namespace PokerProject
 
         currentCard.updateView();
       }
-      int height = this.PreferredSize.Height - kapitaal.PreferredHeight - 7;
-      int width;
+      int height = cardHeight;
       if (_controller == _controller.getControllerPoker().getModelPoker().FlopController)
       {
-        width = 50;
-        kapitaal.Text = "Totaalpot: € 99";
+        naam.Hide();
+        curInzet.Hide();
+        height += 5;
+        kapitaal.Font = new Font(kapitaal.Font.Name, (kapitaal.Font.Size+5), kapitaal.Font.Style, kapitaal.Font.Unit);
       }
       else
       {
-        width = 40;
-        kapitaal.Text = "Uw kapitaal: € 99";
+        updateName();
+        naam.Location = new Point(5, height);
+        height += naam.Height + 5;
+        updateCurInzet();
+        curInzet.Location = new Point(5, height + kapitaal.Height +5);
       }
-      kapitaal.Location = new Point(width, height);
+      updateKapitaal();
+      kapitaal.Location = new Point(5, height);
+      
+    }
+
+    public void updateName()
+    {
+      naam.Text = _controller.getModelPlayer().Name;
+    }
+    public void updateCurInzet()
+    {
+      curInzet.Text = "Uw inzet: €"+_controller.getModelPlayer().MomenteleInzet;
+    }
+
+    public void updateKapitaal()
+    {
+      string tekstVoor;
+      if (_controller == _controller.getControllerPoker().getModelPoker().FlopController)
+      {
+        tekstVoor = "Totaalpot: € ";
+      }
+      else
+      {
+        tekstVoor = "Uw kapitaal: € ";
+      }
+      kapitaal.Text = tekstVoor + _controller.getModelPlayer().Kapitaal;
+    }
+
+    public void updateBack(Color newColor)
+    {
+      this.BackColor = newColor;
+    }
+
+    public playerController getControllerPlayer()
+    {
+      return _controller;
     }
   }
 }

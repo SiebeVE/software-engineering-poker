@@ -46,18 +46,25 @@ namespace PokerProject
       controller.Fold();
     }
 
-        public void updateUIButton() {
-            Inzet.Text = "Check";
+    public void updateUIButton()
+    {
+      Inzet.Text = "Check";
 
-        }
-        public void updateUIAllin() {
-            raise_bttn.Text = "All in";
+    }
+    public void updateUIAllin()
+    {
+      raise_bttn.Text = "All in";
 
-        }
+    }
 
-        private void Inzet_Click(object sender, EventArgs e)
-        {
+    private void Inzet_Click(object sender, EventArgs e)
+    {
 
+    }
+
+    public void updateCurrentPlayer()
+    {
+      currentPlayer.Text = controller.getControllerPoker().getModelPoker().getCurrentPlayer().getModelPlayer().Name;
     }
   }
 }
