@@ -21,6 +21,7 @@ namespace PokerProject
     private int smallBlind = 5;
     private int bigBlind;
 
+    private int biggestBet;
     
     private buttonsView view_button;
 
@@ -109,6 +110,10 @@ namespace PokerProject
       {
         return view_button;
       }
+      set
+      {
+        view_button = value;
+      }
     }
 
     public int BigBlind
@@ -142,6 +147,17 @@ namespace PokerProject
       set
       {
         indexCurrentPlayer = value;
+      }
+    }
+    public int BiggestBet
+    {
+      get
+      {
+        return biggestBet;
+      }
+      set
+      {
+        biggestBet = value;
       }
     }
   }

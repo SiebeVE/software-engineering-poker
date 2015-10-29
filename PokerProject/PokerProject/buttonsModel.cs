@@ -13,23 +13,6 @@ namespace PokerProject
         private playerModel currentPlayer;
         private playerModel bigPot;
 
-        public void Call() {
-
-            
-            
-        }
-
-        public void Fold() {
-
-     
-        }
-
-        public void Raise() {
-
-      
-
-        }
-
     /* * * * * * * * * * * * * * * * * * * * * * * * * * *
     *                G  E  T  T  E  R  S                 *
     * * * * * * * * * * * * * * * * * * * * * * * * * *  */

@@ -22,6 +22,15 @@ namespace PokerProject
 
     public void initializeViewPoker()
     {
+      //toevoegen knoppen speler
+      buttonsController button = new buttonsController(_controller);
+      buttonsView buttonView = button.getViewButtons();
+      _controller.getModelPoker().View_button = buttonView;
+      buttonView.Location = new Point(320, 600);
+      button.getViewButtons().updateCurrentPlayer();
+      buttonView.toggleDisable();
+      Controls.Add(buttonView);
+
       //toevoegen views van spelers
       List<playerView> players = _controller.getViewsPlayers();
       List<playerController> players_rightOrder = new List<playerController>();
@@ -61,13 +70,7 @@ namespace PokerProject
       Controls.Add(flopView);
       flopView.updateKapitaal();
 
-      //toevoegen knoppen speler
-      buttonsController button = new buttonsController(_controller);
-      buttonsView buttonView = button.getViewButtons();
-      buttonView.Location = new Point(320, 600);
-      button.getViewButtons().updateCurrentPlayer();
-      Controls.Add(buttonView);
-
+      
       _controller.makeCurrent(0);
     }
   }

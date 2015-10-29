@@ -33,11 +33,25 @@ namespace PokerProject
     */
     public void Call()
     {
-
-      model_buttons.Call();
-
+      //huidige speler ophalen
+      pokerModel _modelPoker = _controllerPoker.getModelPoker();
+      playerController huidigeSpeler = _modelPoker.Players[_modelPoker.IndexCurrentPlayer];
+      //ophalen van huidige inzet
+      int huidigeInzet = huidigeSpeler.getModelPlayer().MomenteleInzet;
+      //berekenen van verschil tussen grootste bet en huige ingezet
+      int verschilHuidig = _modelPoker.BiggestBet - huidigeInzet;
+      //verschil verminderen van kapitaal en nieuwe inzet voor speler + totaalpot
+      huidigeSpeler.getModelPlayer().MomenteleInzet += verschilHuidig;
+      huidigeSpeler.getModelPlayer().Kapitaal -= verschilHuidig;
+      _controllerPoker.getModelPoker().FlopController.getModelPlayer().Kapitaal += verschilHuidig;
+      //updaten van view speler en flop
+      huidigeSpeler.getViewPlayer().updateKapitaal();
+      huidigeSpeler.getViewPlayer().updateCurInzet();
+      _controllerPoker.getModelPoker().FlopController.getViewPlayer().updateKapitaal();
+      //volgende speler
+      _controllerPoker.nextPlayer();
       //Update de view met de nieuwe waarde
-      view_buttons.updateUIButton();
+      //view_buttons.updateUIButton();
 
     }
 
@@ -52,7 +66,7 @@ namespace PokerProject
     public void Fold()
     {
 
-      model_buttons.Fold();
+      //model_buttons.Fold();
 
       //Update de view met de nieuwe waarde
 
@@ -65,7 +79,7 @@ namespace PokerProject
     public void Raise()
     {
 
-      model_buttons.Raise();
+      //model_buttons.Raise();
 
       //Update de view met de nieuwe waarde
       view_buttons.updateUIAllin();

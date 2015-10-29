@@ -36,6 +36,7 @@ namespace PokerProject
       createViewsPlayers(_model.NumberOfPlayers);
       _view.initializeViewPoker();
       _model.Players[0].getModelPlayer().MomenteleInzet = _model.BigBlind;
+      changeBet(_model.BigBlind);
       _model.Players[1].getModelPlayer().MomenteleInzet = _model.SmallBlind;
       _model.Players[0].getViewPlayer().updateCurInzet();
       _model.Players[1].getViewPlayer().updateCurInzet();
@@ -123,7 +124,8 @@ namespace PokerProject
     {
       _model.IndexCurrentPlayer = newCurrent;
       _model.getCurrentPlayer().getModelPlayer().Current = true;
-      cardsFlipCurrent();
+      //cardsFlipCurrent();
+      //_model.View_button.toggleDisable();
       changeStyleCurrent(true);
     }
     public void changeStyleCurrent(bool newCurrent)
@@ -142,7 +144,7 @@ namespace PokerProject
 
     public void nextPlayer()
     {
-      cardsFlipCurrent();
+      //cardsFlipCurrent();
       changeStyleCurrent(false);
       int newIndexCurrent = _model.IndexCurrentPlayer + 1;
       if (newIndexCurrent >= _model.NumberOfPlayers)
@@ -150,6 +152,14 @@ namespace PokerProject
         newIndexCurrent = 0;
       }
       makeCurrent(newIndexCurrent);
+    }
+
+    public void changeBet(int newBet)
+    {
+      if (newBet > _model.BiggestBet)
+      {
+        _model.BiggestBet = newBet;
+      }
     }
   }
 }

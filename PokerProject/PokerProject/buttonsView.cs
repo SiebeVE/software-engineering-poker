@@ -30,14 +30,14 @@ namespace PokerProject
 
     }
 
-    private void button3_Click(object sender, EventArgs e)
+    private void raise_Click(object sender, EventArgs e)
     {
-      /* raise */
       controller.Raise();
     }
 
     private void call_bttn_Click(object sender, EventArgs e)
     {
+      omdraaienCardsHuidige();
       controller.Call();
     }
 
@@ -48,7 +48,7 @@ namespace PokerProject
 
     public void updateUIButton()
     {
-      Inzet.Text = "Check";
+      //Inzet.Text = "Check";
 
     }
     public void updateUIAllin()
@@ -57,14 +57,38 @@ namespace PokerProject
 
     }
 
-    private void Inzet_Click(object sender, EventArgs e)
-    {
-
-    }
-
     public void updateCurrentPlayer()
     {
-      currentPlayer.Text = controller.getControllerPoker().getModelPoker().getCurrentPlayer().getModelPlayer().Name;
+      currentPlayer.Text = "Huidige speler: " + controller.getControllerPoker().getModelPoker().getCurrentPlayer().getModelPlayer().Name;
+    }
+
+    public void toggleDisable()
+    {
+      //omdraaien of enabled van alle knoppen en velden
+      call_bttn.Enabled = !call_bttn.Enabled;
+      showCards.Enabled = !showCards.Enabled;
+      fold_bttn.Enabled = !fold_bttn.Enabled;
+      raise_bttn.Enabled = !raise_bttn.Enabled;
+      inzet.Enabled = !inzet.Enabled;
+    }
+
+    public void omdraaienCardsHuidige()
+    {
+      //terug omdraaien van enable knoppen
+      toggleDisable();
+      //ophalen controller huidige speler
+      playerController curPlayerController = controller.getControllerPoker().getModelPoker().Players[controller.getControllerPoker().getModelPoker().IndexCurrentPlayer];
+      //tonen kaarten van huidige speler
+      List<cardView> kaarten = curPlayerController.getCardsView();
+      foreach (cardView kaart in kaarten)
+      {
+        kaart.getControllerCard().flipCard();
+      }
+    }
+
+    private void showCards_Click(object sender, EventArgs e)
+    {
+      omdraaienCardsHuidige();
     }
   }
 }

@@ -24,6 +24,11 @@ namespace PokerProject
       updateView();
     }
 
+    public cardController getControllerCard()
+    {
+      return _controller;
+    }
+
     public void updateView()
     {
       string cardName;
@@ -41,11 +46,6 @@ namespace PokerProject
       }
       cardPicture.ImageLocation = _model.CardsPath + cardName + _model.CardsExtension;
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
-    }
-
-    private void cardPicture_Click(object sender, EventArgs e)
-    {
-
     }
   }
 }
