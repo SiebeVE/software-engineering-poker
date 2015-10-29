@@ -41,3 +41,4 @@ C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engin
 C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.pokerView.resources
 C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.Properties.Resources.resources
 C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.csproj.GenerateResource.Cache
+C:\Users\Toon\MT\02_jaar\01_periode\Software_Engineering_Web-UX 2\software-engineering-poker\PokerProject\PokerProject\obj\Debug\PokerProject.startschermView.resources
