@@ -12,10 +12,12 @@ namespace PokerProject
     private buttonsView view_buttons;
     private buttonsModel model_buttons;
 
-    // Constructor maken van buttonsController
-    public buttonsController()
-    {
+    private pokerController _controllerPoker;
 
+    // Constructor maken van buttonsController
+    public buttonsController(pokerController controllerPoker)
+    {
+      _controllerPoker = controllerPoker;
       view_buttons = new buttonsView(this);
       model_buttons = new buttonsModel();
 
@@ -34,10 +36,15 @@ namespace PokerProject
 
       model_buttons.Call();
 
-            //Update de view met de nieuwe waarde
-            view_buttons.updateUIButton();
+      //Update de view met de nieuwe waarde
+      view_buttons.updateUIButton();
 
-        }
+    }
+
+    public pokerController getControllerPoker()
+    {
+      return _controllerPoker;
+    }
 
     /*
         Passen, je hand weggooien. Men verliest hierbij de kans om de pot te winnen.
@@ -47,8 +54,8 @@ namespace PokerProject
 
       model_buttons.Fold();
 
-            //Update de view met de nieuwe waarde
-            
+      //Update de view met de nieuwe waarde
+
 
     }
 
@@ -73,7 +80,7 @@ namespace PokerProject
 
     *   *   *   *   *  Returns de waarde  *   *   *   *  */
 
-    
+
 
     /* public int Kapitaal
         {

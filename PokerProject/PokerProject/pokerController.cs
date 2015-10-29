@@ -34,6 +34,14 @@ namespace PokerProject
     {
       makeDeck();
       createViewsPlayers(_model.NumberOfPlayers);
+      _view.initializeViewPoker();
+      _model.Players[0].getModelPlayer().MomenteleInzet = _model.BigBlind;
+      _model.Players[1].getModelPlayer().MomenteleInzet = _model.SmallBlind;
+      _model.Players[0].getViewPlayer().updateCurInzet();
+      _model.Players[1].getViewPlayer().updateCurInzet();
+      _model.FlopController.getModelPlayer().Kapitaal = _model.BigBlind + _model.SmallBlind;
+      _model.FlopController.getViewPlayer().updateKapitaal();
+      nextPlayer();
     }
 
     public List<playerView> getViewsPlayers()
@@ -57,7 +65,7 @@ namespace PokerProject
       {
         //beginnen for loop met soort kiezen
         string currentKind;
-        switch(kindCount)
+        switch (kindCount)
         {
           case 0:
             currentKind = "hearts";
@@ -85,7 +93,7 @@ namespace PokerProject
       int currentCardIndex = 0;
       while (currentCardIndex < tempValue.Count)
       {
-        int randomIndex = random.Next(0, (tempValue.Count-1)); //random tussen 1 en en aantal elementen in temp lijst
+        int randomIndex = random.Next(0, (tempValue.Count - 1)); //random tussen 1 en en aantal elementen in temp lijst
         _model.addCardKind(tempKind[randomIndex]); //random item soort toevoegen aan lijst
         _model.addCardValue(tempValue[randomIndex]); //random value soort toevoegen aan lijst
         tempKind.RemoveAt(randomIndex); //verwijderen uit temp lijsten
@@ -100,6 +108,48 @@ namespace PokerProject
         playerView playerView = player.getViewPlayer(); //Nieuwe view player
         _model.addPlayer(player); //toevoegen speler aan lijst
       }
+    }
+
+    public void cardsFlipCurrent()
+    {
+      List<cardController> cardsOfPlayer = _model.getCurrentPlayer().getModelPlayer().Cards;
+      foreach (cardController card in cardsOfPlayer)
+      {
+        card.flipCard();
+      }
+    }
+
+    public void makeCurrent(int newCurrent)
+    {
+      _model.IndexCurrentPlayer = newCurrent;
+      _model.getCurrentPlayer().getModelPlayer().Current = true;
+      cardsFlipCurrent();
+      changeStyleCurrent(true);
+    }
+    public void changeStyleCurrent(bool newCurrent)
+    {
+      Color colorBack;
+      if (!newCurrent)
+      {
+        colorBack = Color.Gray; ;
+      }
+      else
+      {
+        colorBack = Color.Green;
+      }
+      _model.getCurrentPlayer().getViewPlayer().updateBack(colorBack);
+    }
+
+    public void nextPlayer()
+    {
+      cardsFlipCurrent();
+      changeStyleCurrent(false);
+      int newIndexCurrent = _model.IndexCurrentPlayer + 1;
+      if (newIndexCurrent >= _model.NumberOfPlayers)
+      {
+        newIndexCurrent = 0;
+      }
+      makeCurrent(newIndexCurrent);
     }
   }
 }
