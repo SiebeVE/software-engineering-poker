@@ -17,7 +17,6 @@ namespace PokerProject
       _controllerPlayer = controller;
       _model = new cardModel();
       _view = new cardView(this); //controller injecteren in view voor 2 richtingsverkeer
-      flipCard();
     }
 
     public cardView getViewCard()
