@@ -32,13 +32,19 @@ namespace PokerProject
 
     private void raise_Click(object sender, EventArgs e)
     {
-      controller.Raise();
+      if (call_bttn.Text == "Check\r\n")
+      {
+        toggleCheck();
+      }
+      omdraaienCardsHuidige();
+      controller.Raise(roundNumber(inzet.Value));
     }
 
     private void call_bttn_Click(object sender, EventArgs e)
     {
-      omdraaienCardsHuidige();
-      controller.Call();
+      controller.getControllerPoker().endGame();
+      /*omdraaienCardsHuidige();
+      controller.Call();*/
     }
 
     private void fold_bttn_Click(object sender, EventArgs e)
@@ -93,11 +99,39 @@ namespace PokerProject
 
     private void inzet_ValueChanged(object sender, EventArgs e)
     {
-      if (!(inzet.Value % 1 == 0))
+      roundNumber(inzet.Value);
+      if (inzet.Value == inzet.Maximum)
+      {
+        raise_bttn.Text = "All-in\r\n";
+      }
+      else
+      {
+        raise_bttn.Text = "Raise\r\n";
+      }
+    }
+
+    public void toggleRaise()
+    {
+      if (raise_bttn.Text == "Raise\r\n")
+      {
+        raise_bttn.Text = "Bet\r\n";
+      }
+      else
+      {
+        int test = controller.getControllerPoker().getModelPoker().IndexCurrentPlayer;
+        int test2 = controller.getControllerPoker().getModelPoker().IndexStopPlayer;
+        raise_bttn.Text = "Raise\r\n";
+      }
+    }
+
+    public int roundNumber(decimal number)
+    {
+      if (!(number % 1 == 0))
       {
         //getal is decimaal, afronden
-        inzet.Value = Math.Round(inzet.Value);
+        number = Math.Round(number);
       }
+      return (int)number;
     }
 
     public void toggleCheck()
@@ -115,6 +149,12 @@ namespace PokerProject
     public string getTextButton()
     {
       return call_bttn.Text;
+    }
+
+    public void changeBoundriesRaise(int min, int max)
+    {
+      inzet.Minimum = min;
+      inzet.Maximum = max;
     }
   }
 }

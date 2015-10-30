@@ -35,7 +35,7 @@ namespace PokerProject
 
     public void flipCard()
     {
-      _model.ShowCard = !_model.ShowCard; // omdraaien van kaard
+      _model.ShowCard = true; // omdraaien van kaard
       _view.updateView(); // updaten van view
     }
 

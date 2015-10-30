@@ -80,6 +80,7 @@ namespace PokerProject
       huidigeSpeler.getViewPlayer().updateKapitaal();
       huidigeSpeler.getViewPlayer().updateCurInzet();
       _controllerPoker.getModelPoker().FlopController.getViewPlayer().updateKapitaal();
+      _controllerPoker.changeBet(nieuweInzet);
     }
 
     public void fold()

@@ -33,7 +33,14 @@ namespace PokerProject
     */
     public void Call()
     {
-      _controllerPoker.getModelPoker().getCurrentPlayer().zetIn(_controllerPoker.getModelPoker().BiggestBet);
+      if (view_buttons.getTextButton() == "Check\r\n")
+      {
+        _controllerPoker.getModelPoker().getCurrentPlayer().zetIn(0);
+      }
+      else
+      {
+        _controllerPoker.getModelPoker().getCurrentPlayer().zetIn(_controllerPoker.getModelPoker().BiggestBet);
+      }
       //volgende speler
       _controllerPoker.nextPlayer();
       //Update de view met de nieuwe waarde
@@ -58,13 +65,20 @@ namespace PokerProject
     /*
         Inzet verhogen.
     */
-    public void Raise()
+    public void Raise(int raiseWith)
     {
 
       //model_buttons.Raise();
-
-      //Update de view met de nieuwe waarde
-      view_buttons.updateUIAllin();
+      _controllerPoker.getModelPoker().getCurrentPlayer().zetIn(raiseWith);
+      int prevIndexStopPlayer = _controllerPoker.getModelPoker().IndexStopPlayer;
+      int newIndexStopPlayer = _controllerPoker.prevIndexNumberOf(prevIndexStopPlayer);
+      List<playerController> players = _controllerPoker.getModelPoker().Players;
+      while (players[_controllerPoker.prevIndexNumberOf(newIndexStopPlayer)].getModelPlayer().Folded)
+      {
+        newIndexStopPlayer = _controllerPoker.prevIndexNumberOf(newIndexStopPlayer);
+      }
+      _controllerPoker.getModelPoker().IndexStopPlayer = newIndexStopPlayer;
+      _controllerPoker.nextPlayer();
 
     }
 

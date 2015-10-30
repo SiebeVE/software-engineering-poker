@@ -15,6 +15,8 @@ namespace PokerProject
     static int seeder = new Random().Next(); //nodig omdat anders random getal altijd hetzelfde is
     Random random = new Random(++seeder); //random getal genereren
 
+    private bool gameEnded = false;
+
     public pokerController() //constructor
     {
       _model = new pokerModel();
@@ -145,12 +147,15 @@ namespace PokerProject
         }
         newCurrent = nextIndexNumberOf(newCurrent);
       }
-      //Laten weten aan model
-      _model.IndexCurrentPlayer = newCurrent;
-      //laten weten aan player model dat dit huidige is
-      _model.getCurrentPlayer().getModelPlayer().Current = true;
-      //van stijl veranderen -> maken = true
-      changeStyleCurrent(true);
+      if (!gameEnded)
+      {
+        //Laten weten aan model
+        _model.IndexCurrentPlayer = newCurrent;
+        //laten weten aan player model dat dit huidige is
+        _model.getCurrentPlayer().getModelPlayer().Current = true;
+        //van stijl veranderen -> maken = true
+        changeStyleCurrent(true);
+      }
     }
     public void changeStyleCurrent(bool newCurrent)
     {
@@ -173,8 +178,8 @@ namespace PokerProject
     public void endRound()
     {
       //ronde is ten einde
-      //veranderen van check naar call op button
-      _model.View_button.toggleCheck();
+      //veranderen van raise naar bet
+      _model.View_button.toggleRaise();
       //inzet van speler leegmaken
       int indexOfSmall = 0;
       foreach (playerController player in _model.Players)
@@ -209,14 +214,166 @@ namespace PokerProject
         case 3:
           kaartenFlop[4].getControllerCard().flipCard();
           break;
+        case 4:
+          endGame();
+          break;
       }
       if (_model.View_button.getTextButton() != "Check\r\n")
       {
         _model.View_button.toggleCheck();
       }
-      _model.View_button.updateCurrentPlayer();
-      _model.BiggestBet = 0;
-      _model.Round++;
+      if (!gameEnded)
+      {
+        _model.View_button.updateCurrentPlayer();
+        _model.BiggestBet = _model.BigBlind;
+        _model.Round++;
+      }
+    }
+
+    public void endGame()
+    {
+      gameEnded = true;
+      //toon alle kaarten
+      foreach (playerController player in _model.Players)
+      {
+        foreach(cardView card in player.getCardsView())
+        {
+          card.getControllerCard().flipCard();
+        }
+      }
+      giveIndexWinner();
+    }
+
+    public void giveIndexWinner()
+    {
+      //rondgaan per speler wat hij/zij heeft
+      foreach (playerController player in _model.Players)
+      {
+        checkHand(player);
+      }
+    }
+
+    public void checkHand(playerController curPlayer)
+    {
+      //ophalen kaarten flop
+      List<cardView> cardsFlop = _model.FlopController.getCardsView();
+      //maken lijst met kind en lijst met value
+      List<int> valueAllCards = new List<int>();
+      List<string> kindAllCards = new List<string>();
+      //eerst eigen kaarten toevoegen
+      foreach (cardView card in curPlayer.getCardsView())
+      {
+        string cardKind = card.getControllerCard().getModelCard().CardKind;
+        int cardValue = card.getControllerCard().getModelCard().CardValue;
+        valueAllCards.Add(cardValue);
+        kindAllCards.Add(cardKind);
+      }
+      //dan van flop
+      foreach (cardView card in cardsFlop)
+      {
+        string cardKind = card.getControllerCard().getModelCard().CardKind;
+        int cardValue = card.getControllerCard().getModelCard().CardValue;
+        valueAllCards.Add(cardValue);
+        kindAllCards.Add(cardKind);
+      }
+      int valueCombo = checkAllPossible(valueAllCards, kindAllCards);
+    }
+
+    public int checkAllPossible(List<int> values, List<string> kinds)
+    {
+      int value = 0;
+      value = checkRoyalFlush(values, kinds);
+      int street = checkStreet(values);
+      int threeOfAKind = checkThreeOfAKind(values);
+      int twoPair = checkTwoPair(values);
+      int pair = checkPair(values);
+      return value;
+    }
+
+    public int checkPair(List<int> values)
+    {
+      IEnumerable<int> newVal = values.Distinct();
+      if (values.Count - newVal.Count() == 1)
+      {
+        //exact 1 paar
+        return 1;
+      }
+      return 0;
+    }
+
+    public int checkTwoPair(List<int> values)
+    {
+      if (values.Count - values.Distinct().Count() == 2)
+      {
+        //exact 2 paar
+        if (checkThreeOfAKind(values) == 1)
+        {
+          //Is 3 of a kind, dus negeer
+          return 0;
+        }
+        else
+        {
+          return 1;
+        }
+      }
+      return 0;
+    }
+
+    public int checkStreet(List<int> values)
+    {
+      values.Sort();
+      int numberOfSameVal = 1;
+      int prevVal = 0;
+      foreach (int value in values)
+      {
+        if (prevVal != value)
+        {
+          if ((prevVal + 1) != value || prevVal == 0)
+          {
+            numberOfSameVal = 1;
+          }
+          else
+          {
+            numberOfSameVal++;
+            if (numberOfSameVal == 5)
+            {
+              return 1;
+            }
+          }
+          prevVal = value;
+        }
+      }
+      return 0;
+    }
+
+    public int checkThreeOfAKind(List<int> values)
+    {
+      values.Sort();
+      int numberOfSameVal = 1;
+      int prevVal = 0;
+      foreach(int value in values)
+      {
+        if(prevVal != value)
+        {
+          numberOfSameVal = 1;
+          prevVal = value;
+        }
+        else
+        {
+          numberOfSameVal++;
+          if (numberOfSameVal == 3)
+          {
+            return 1;
+          }
+        }
+      }
+      return 0;
+    }
+
+    public int checkRoyalFlush(List<int> values, List<string> kinds)
+    {
+      //checkFlush(kinds);
+      return 0;
     }
 
     public void nextPlayer()
@@ -230,7 +387,7 @@ namespace PokerProject
       string textButton = _model.View_button.getTextButton();
 
       //nieuwe speler klaarmaken
-      if (_model.IndexCurrentPlayer == _model.IndexStopPlayer && !_model.FirstGame)
+      if (_model.IndexCurrentPlayer == _model.IndexStopPlayer && !_model.FirstGame && !_model.NewHighest)
       {
         endRound();
       }
@@ -239,24 +396,43 @@ namespace PokerProject
         makeCurrent(newIndexCurrent);
         //tekst huidige speler laten veranderen
         _model.View_button.updateCurrentPlayer();
+        //checken welke nummers mag in raise
+        playerModel currentPlayerModel = _model.getCurrentPlayer().getModelPlayer();
+        int curInzet = currentPlayerModel.MomenteleInzet;
+        int newMin = 0;
+        int newMax = currentPlayerModel.Kapitaal;
+        //bepalen minimum
+        if (_model.BiggestBet > curInzet)
+        {
+          newMin = _model.BiggestBet - curInzet + 1;
+        }
+        _model.View_button.changeBoundriesRaise(newMin, newMax);
+        
       }
       /*if (_model.IndexCurrentPlayer == _model.IndexStopPlayer && !_model.FirstGame && !firstRound)
       {
         firstRound = true;
       }*/
-      //checken voor allereerste volgende speler
-      if (_model.FirstGame)
+      if (!gameEnded)
       {
-        _model.FirstRoundOfHand = true;
-        _model.FirstGame = false;
-      }
-      //checken of eerste ronde is en persoon nog mag checken
-      if (newIndexCurrent == _model.IndexStopPlayer && _model.FirstRoundOfHand)
-      {
-        //tonen van check knop
-        if (_model.View_button.getTextButton() != "Check\r\n")
+        //checken voor allereerste volgende speler
+        if (_model.FirstGame)
         {
-          _model.View_button.toggleCheck();
+          _model.FirstRoundOfHand = true;
+          _model.FirstGame = false;
+        }
+        //checken of eerste ronde is en persoon nog mag checken
+        if (newIndexCurrent == _model.IndexStopPlayer && _model.FirstRoundOfHand)
+        {
+          //tonen van check knop
+          if (_model.View_button.getTextButton() != "Check\r\n")
+          {
+            //_model.View_button.toggleCheck();
+          }
+        }
+        if (_model.NewHighest)
+        {
+          _model.NewHighest = false;
         }
       }
     }
@@ -289,7 +465,10 @@ namespace PokerProject
       if (newBet > _model.BiggestBet)
       {
         _model.BiggestBet = newBet;
+        _model.NewHighest = true;
+        //_model.IndexStopPlayer=prevIndexNumberOf( _model.IndexCurrentPlayer);
         _model.IndexStopPlayer = _model.IndexCurrentPlayer;
+        //_model.FirstGame = false;
       }
     }
   }

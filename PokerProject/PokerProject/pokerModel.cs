@@ -26,7 +26,8 @@ namespace PokerProject
     private bool firstGame;
     private bool firstRoundOfHand;
     private int round = 1;
-    
+    private bool newHighest = false;
+
     private buttonsView view_button;
 
     public pokerModel()
@@ -206,6 +207,17 @@ namespace PokerProject
       set
       {
         round = value;
+      }
+    }
+    public bool NewHighest
+    {
+      get
+      {
+        return newHighest;
+      }
+      set
+      {
+        newHighest = value;
       }
     }
   }
