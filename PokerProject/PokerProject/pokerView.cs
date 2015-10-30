@@ -69,13 +69,13 @@ namespace PokerProject
       flop.getModelPlayer().Cards[1].getModelCard().CardKind = "hearts";
       flop.getModelPlayer().Cards[2].getModelCard().CardKind = "hearts";
       flop.getModelPlayer().Cards[3].getModelCard().CardKind = "hearts";
-      flop.getModelPlayer().Cards[4].getModelCard().CardKind = "hearts";*/
+      flop.getModelPlayer().Cards[4].getModelCard().CardKind = "hearts";
 
-      flop.getModelPlayer().Cards[0].getModelCard().CardValue = 5;
-      flop.getModelPlayer().Cards[1].getModelCard().CardValue = 5;
-      flop.getModelPlayer().Cards[2].getModelCard().CardValue = 5;
-      /*flop.getModelPlayer().Cards[3].getModelCard().CardValue = 8;
-      flop.getModelPlayer().Cards[4].getModelCard().CardValue = 8;*/
+      flop.getModelPlayer().Cards[0].getModelCard().CardValue = 9;
+      flop.getModelPlayer().Cards[1].getModelCard().CardValue = 13;
+      flop.getModelPlayer().Cards[2].getModelCard().CardValue = 12;
+      flop.getModelPlayer().Cards[3].getModelCard().CardValue = 11;
+      flop.getModelPlayer().Cards[4].getModelCard().CardValue = 10;*/
 
       _controller.getModelPoker().FlopController = flop;
       playerView flopView = flop.getViewPlayer();

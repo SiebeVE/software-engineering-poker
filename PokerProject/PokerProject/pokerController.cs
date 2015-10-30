@@ -282,8 +282,8 @@ namespace PokerProject
     public int checkAllPossible(List<int> values, List<string> kinds)
     {
       int value = 0;
-      value = checkRoyalFlush(values, kinds);
-      int straightFlush = checkStraightFlush
+      int royalFlush = checkRoyalFlush(values, kinds);
+      int straightFlush = checkStraightFlush(values, kinds);
       int fourOfAKind = checkFourOfAKind(values);
       int fullHouse = checkFullHouse(values);
       int flush = checkFlush(kinds);
@@ -459,9 +459,109 @@ namespace PokerProject
       return 0;
     }
 
+    public int checkStraightFlush(List<int> values, List<string> kinds)
+    {
+      //nieuwe lijsten aanmaken zodat apart lijst gesorteerd kan worden en link tss lijsten behouden blijft
+      List<int> sortedValues = new List<int>();
+      List<string> sortedKinds = new List<string>();
+      int teller = 0;
+      foreach(int value in values)
+      {
+        sortedValues.Add(value);
+        sortedKinds.Add(kinds[teller]);
+        teller++;
+      }
+      //checken of straat aanwezig is
+      if (checkStraight(sortedValues) == 1)
+      {
+        //nu checken of er geen valse kind tussen zit 
+        //zelfde sortering doen van value en kind zodat index per kaart zelfde blijft
+        int[] arrSortedValues = new int[7];
+        string[] arrSortedKinds = new string[7];
+        int index = 0;
+        foreach (int value in values)
+        {
+          arrSortedValues[index] = value;
+          arrSortedKinds[index] = kinds[index];
+          index++;
+        }
+        Array.Sort(arrSortedValues, arrSortedKinds);
+        int numberOfSameKind = 1;
+        string prevKind = "";
+        foreach (string kind in arrSortedKinds)
+        {
+          if (prevKind != kind)
+          {
+            numberOfSameKind = 1;
+            prevKind = kind;
+          }
+          else
+          {
+            numberOfSameKind++;
+            if (numberOfSameKind == 5)
+            {
+              return 1;
+            }
+          }
+        }
+      }
+      return 0;
+    }
+
     public int checkRoyalFlush(List<int> values, List<string> kinds)
     {
-      //checkFlush(kinds);
+      List<int> sortedValues = new List<int>();
+      List<string> sortedKinds = new List<string>();
+      int teller = 0;
+      foreach (int value in values)
+      {
+        sortedValues.Add(value);
+        sortedKinds.Add(kinds[teller]);
+        teller++;
+      }
+      //checken of straat aanwezig is
+      if (checkStraight(sortedValues) == 1)
+      {
+        //nu checken of er geen valse kind tussen zit 
+        //zelfde sortering doen van value en kind zodat index per kaart zelfde blijft
+        int[] arrSortedValues = new int[7];
+        string[] arrSortedKinds = new string[7];
+        int index = 0;
+        foreach (int value in values)
+        {
+          arrSortedValues[index] = value;
+          arrSortedKinds[index] = kinds[index];
+          index++;
+        }
+        Array.Sort(arrSortedValues, arrSortedKinds);
+        int numberOfSameKind = 1;
+        string prevKind = "";
+        foreach (string kind in arrSortedKinds)
+        {
+          if (prevKind != kind)
+          {
+            numberOfSameKind = 1;
+            prevKind = kind;
+          }
+          else
+          {
+            numberOfSameKind++;
+            if (numberOfSameKind == 5)
+            {
+              int indexOf14 = Array.IndexOf(arrSortedValues, 14);
+              int indexOf10 = Array.IndexOf(arrSortedValues, 10);
+              if (indexOf10 > -1 && indexOf14 > -1)
+              {
+                //zowel 10 als 14 in array
+                if (arrSortedKinds[indexOf10] == prevKind && arrSortedKinds[indexOf14] == prevKind)
+                {
+                  return 1;
+                }
+              }
+            }
+          }
+        }
+      }
       return 0;
     }
 
