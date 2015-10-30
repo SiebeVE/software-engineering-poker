@@ -32,13 +32,13 @@ namespace PokerProject
     public void updateView()
     {
       string cardName;
-      if (_model.ShowCard)
-      {
-        cardName = _model.CardKind + _model.CardValue;
-      }
-      else if (_controller.getControllerPlayer().getModelPlayer().Folded)
+      if (_controller.getControllerPlayer().getModelPlayer().Folded)
       {
         cardName = "fold";
+      }
+      else if (_model.ShowCard)
+      {
+        cardName = _model.CardKind + _model.CardValue;
       }
       else
       {

@@ -11,7 +11,6 @@ namespace PokerProject
   {
     private pokerView _view;
     private pokerModel _model;
-    private bool firstRound = true;
 
     static int seeder = new Random().Next(); //nodig omdat anders random getal altijd hetzelfde is
     Random random = new Random(++seeder); //random getal genereren
@@ -138,6 +137,14 @@ namespace PokerProject
     public void makeCurrent(int newCurrent)
     {
       //aanpassen van huidige speler
+      while (_model.Players[newCurrent].getModelPlayer().Folded)
+      {
+        if (newCurrent == _model.IndexStopPlayer)
+        {
+          endRound();
+        }
+        newCurrent = nextIndexNumberOf(newCurrent);
+      }
       //Laten weten aan model
       _model.IndexCurrentPlayer = newCurrent;
       //laten weten aan player model dat dit huidige is
@@ -163,63 +170,69 @@ namespace PokerProject
       _model.getCurrentPlayer().getViewPlayer().updateBack(colorBack);
     }
 
+    public void endRound()
+    {
+      //ronde is ten einde
+      //veranderen van check naar call op button
+      _model.View_button.toggleCheck();
+      //inzet van speler leegmaken
+      int indexOfSmall = 0;
+      foreach (playerController player in _model.Players)
+      {
+        player.getModelPlayer().MomenteleInzet = 0;
+        player.getViewPlayer().updateCurInzet();
+        //beurt aan correcte speler geven
+        //zoeken wie dealer button heeft (zoeken persoon voor small blind)
+        if (player.getModelPlayer().Special == "small")
+        {
+          int buttonIndex = prevIndexNumberOf(indexOfSmall);
+          makeCurrent(indexOfSmall);
+          _model.IndexStopPlayer = buttonIndex;
+        }
+        else
+        {
+          indexOfSmall++;
+        }
+      }
+      //volgende kaart(en) van flop tonen
+      List<cardView> kaartenFlop = _model.FlopController.getCardsView();
+      switch (_model.Round)
+      {
+        case 1:
+          kaartenFlop[0].getControllerCard().flipCard();
+          kaartenFlop[1].getControllerCard().flipCard();
+          kaartenFlop[2].getControllerCard().flipCard();
+          break;
+        case 2:
+          kaartenFlop[3].getControllerCard().flipCard();
+          break;
+        case 3:
+          kaartenFlop[4].getControllerCard().flipCard();
+          break;
+      }
+      if (_model.View_button.getTextButton() != "Check\r\n")
+      {
+        _model.View_button.toggleCheck();
+      }
+      _model.View_button.updateCurrentPlayer();
+      _model.BiggestBet = 0;
+      _model.Round++;
+    }
+
     public void nextPlayer()
     {
       //Volgende speler oproepen
       //veranderen van huidige speler achtergrond kleur -> veranderen = false
       changeStyleCurrent(false);
       //Nieuwe index van speler toekenen
-      int newIndexCurrent = nextIndexNumber();
+      int newIndexCurrent = nextIndexNumberOf(_model.IndexCurrentPlayer);
 
       string textButton = _model.View_button.getTextButton();
 
       //nieuwe speler klaarmaken
       if (_model.IndexCurrentPlayer == _model.IndexStopPlayer && !_model.FirstGame)
       {
-        //ronde is ten einde
-        //veranderen van check naar call op button
-        _model.View_button.toggleCheck();
-        //inzet van speler leegmaken
-        int indexOfSmall = 0;
-        foreach (playerController player in _model.Players)
-        {
-          player.getModelPlayer().MomenteleInzet = 0;
-          player.getViewPlayer().updateCurInzet();
-          //beurt aan correcte speler geven
-          //zoeken wie dealer button heeft (zoeken persoon voor small blind)
-          if (player.getModelPlayer().Special == "small")
-          {
-            int buttonIndex = prevIndexNumberOf(indexOfSmall);
-            makeCurrent(indexOfSmall);
-            _model.IndexStopPlayer = buttonIndex;
-          }
-          else
-          {
-            indexOfSmall++;
-          }
-        }
-        //volgende kaart(en) van flop tonen
-        List<cardView> kaartenFlop = _model.FlopController.getCardsView();
-        switch (_model.Round)
-        {
-          case 1:
-            kaartenFlop[0].getControllerCard().flipCard();
-            kaartenFlop[1].getControllerCard().flipCard();
-            kaartenFlop[2].getControllerCard().flipCard();
-            break;
-          case 2:
-            kaartenFlop[3].getControllerCard().flipCard();
-            break;
-          case 3:
-            kaartenFlop[4].getControllerCard().flipCard();
-            break;
-        }
-        if (_model.View_button.getTextButton() != "Check\r\n")
-        {
-          _model.View_button.toggleCheck();
-        }
-        _model.BiggestBet = 0;
-        _model.Round++;
+        endRound();
       }
       else
       {
@@ -248,9 +261,9 @@ namespace PokerProject
       }
     }
 
-    public int nextIndexNumber()
+    public int nextIndexNumberOf(int checkNumber)
     {
-      int newIndexCurrent = _model.IndexCurrentPlayer + 1;
+      int newIndexCurrent = checkNumber + 1;
       if (newIndexCurrent >= _model.NumberOfPlayers)
       {
         //einde van de lijst --> terug naar speler 0

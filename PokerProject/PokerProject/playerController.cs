@@ -81,5 +81,16 @@ namespace PokerProject
       huidigeSpeler.getViewPlayer().updateCurInzet();
       _controllerPoker.getModelPoker().FlopController.getViewPlayer().updateKapitaal();
     }
+
+    public void fold()
+    {
+      _model.Folded = true;
+      List<cardController> kaarten = _model.Cards;
+      foreach (cardController kaart in kaarten)
+      {
+        kaart.getViewCard().updateView();
+      }
+      _controllerPoker.getModelPoker().View_button.toggleDisable();
+    }
   }
 }

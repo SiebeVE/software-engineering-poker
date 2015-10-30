@@ -51,12 +51,8 @@ namespace PokerProject
     */
     public void Fold()
     {
-
-      //model_buttons.Fold();
-
-      //Update de view met de nieuwe waarde
-
-
+      _controllerPoker.getModelPoker().getCurrentPlayer().fold();
+      _controllerPoker.nextPlayer();
     }
 
     /*

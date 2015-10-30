@@ -33,37 +33,6 @@ namespace PokerProject
       kapitaal = startKapitaal;
     }
 
-
-    // Call method
-    public void Call()
-    {
-
-      if (momenteleInzet < inzetPot)
-      {                     //momentele inzet is kleiner als de inzet de pot
-
-        momenteleInzet = inzetPot;                       // momentele inzet is gelijk aan de inzet in de pot
-        kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
-
-      }
-      else
-      {
-
-        _controllerPlayer.getControllerPoker().getModelPoker().View_button.updateUIButton();                    // Veranderd de UI van call naar check (hoop ik)
-
-      }
-
-    }
-
-    // Fold method
-    public void Fold()
-    {
-
-      kapitaal = startKapitaal - momenteleInzet;
-
-      // hand weggooien
-
-    }
-
     // Raise method
     public void Raise()
     {
