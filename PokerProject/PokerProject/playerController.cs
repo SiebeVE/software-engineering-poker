@@ -15,7 +15,7 @@ namespace PokerProject
     public playerController(pokerController controllerPoker, int numberOfCards)
     {
       _controllerPoker = controllerPoker;
-      _model = new playerModel(numberOfCards);
+      _model = new playerModel(numberOfCards, this);
       makeCardViews(_model.NumberOfCards);
       _view = new playerView(this);
     }
@@ -62,6 +62,36 @@ namespace PokerProject
 
         card.getViewCard().updateView(); //view update van de kaart
       }
+    }
+
+    public void zetIn(int nieuweInzet)
+    {
+      //huidige speler ophalen
+      playerController huidigeSpeler = _controllerPoker.getModelPoker().getCurrentPlayer();
+      //ophalen van huidige inzet
+      int huidigeInzet = huidigeSpeler.getModelPlayer().MomenteleInzet;
+      //berekenen van verschil tussen grootste bet en huige ingezet
+      int verschilHuidig = nieuweInzet - huidigeInzet;
+      //verschil verminderen van kapitaal en nieuwe inzet voor speler + totaalpot
+      huidigeSpeler.getModelPlayer().MomenteleInzet += verschilHuidig;
+      huidigeSpeler.getModelPlayer().Kapitaal -= verschilHuidig;
+      _controllerPoker.getModelPoker().FlopController.getModelPlayer().Kapitaal += verschilHuidig;
+      //updaten van view speler en flop
+      huidigeSpeler.getViewPlayer().updateKapitaal();
+      huidigeSpeler.getViewPlayer().updateCurInzet();
+      _controllerPoker.getModelPoker().FlopController.getViewPlayer().updateKapitaal();
+      _controllerPoker.changeBet(nieuweInzet);
+    }
+
+    public void fold()
+    {
+      _model.Folded = true;
+      List<cardController> kaarten = _model.Cards;
+      foreach (cardController kaart in kaarten)
+      {
+        kaart.getViewCard().updateView();
+      }
+      _controllerPoker.getModelPoker().View_button.toggleDisable();
     }
   }
 }

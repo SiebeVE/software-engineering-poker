@@ -39,7 +39,6 @@
       this.Name = "pokerView";
       this.Padding = new System.Windows.Forms.Padding(0, 0, 20, 20);
       this.Size = new System.Drawing.Size(50, 52);
-      this.Load += new System.EventHandler(this.pokerView_Load);
       this.ResumeLayout(false);
 
     }

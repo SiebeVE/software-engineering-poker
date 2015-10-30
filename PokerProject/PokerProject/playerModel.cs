@@ -9,78 +9,49 @@ namespace PokerProject
   public class playerModel
   {
     private List<cardController> cards = new List<cardController>();
-    
 
-        private playerController currentPlayer;
-        private buttonsView view_button;
+    private string name = "test";
+
+    private bool current = false;
 
     private int numberOfCards;
-    private bool folded = true;
+    private bool folded = false;
 
     private int momenteleInzet = 0;
     private int inzetPot;
-    private int startKapitaal  = 500;
+    private int startKapitaal = 500;
     private int kapitaal;
 
-        private int smallBlind;
-        private int BigBlind;
+    private string special;
 
-        public playerModel(int nrOfCards) {
-             numberOfCards = nrOfCards;
-        }
+    private playerController _controllerPlayer;
 
-
-        // Call method
-        public void Call() {
-
-            if (momenteleInzet < inzetPot) {                     //momentele inzet is kleiner als de inzet de pot
-
-                momenteleInzet = inzetPot;                       // momentele inzet is gelijk aan de inzet in de pot
-                kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
-
-            }
-            else {
-
-                view_button.updateUIButton();                    // Veranderd de UI van call naar check (hoop ik)
-
-            }
-
-        }
-
-        // Fold method
-        public void Fold() {
-
-            kapitaal = startKapitaal - momenteleInzet;
-
-            // hand weggooien
-
-        }
-
-        // Raise method
-        public void Raise() {
-
-            if (momenteleInzet <= inzetPot){                     //momentele inzet is kleiner of gelijk aan als de inzet de pot
-
-                momenteleInzet = inzetPot + BigBlind;            // momentele inzet is gelijk aan de inzet in de pot + big blind
-                kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
-
-            }
-            else if (kapitaal >= inzetPot) {                     // All-in knop: want eigen kapitaal is kleiner als inzet pot
-
-                view_button.updateUIAllin();
-
-            }
-
-        }
-
-        public int NumberOfCards
+    public playerModel(int nrOfCards, playerController controller)
     {
-      get
-      {
-        return numberOfCards;
-      }
+      _controllerPlayer = controller;
+      numberOfCards = nrOfCards;
+      kapitaal = startKapitaal;
     }
 
+    // Raise method
+    public void Raise()
+    {
+
+      if (momenteleInzet <= inzetPot)
+      {                     //momentele inzet is kleiner of gelijk aan als de inzet de pot
+
+        momenteleInzet = inzetPot + _controllerPlayer.getControllerPoker().getModelPoker().BigBlind;            // momentele inzet is gelijk aan de inzet in de pot + big blind
+        kapitaal = startKapitaal - momenteleInzet;       // berekening huidig kapitaal
+
+      }
+      else if (kapitaal >= inzetPot)
+      {                     // All-in knop: want eigen kapitaal is kleiner als inzet pot
+
+        _controllerPlayer.getControllerPoker().getModelPoker().View_button.updateUIAllin();
+
+      }
+
+    }
     public void addCard(cardController card)
     {
       cards.Add(card);
@@ -93,7 +64,6 @@ namespace PokerProject
         return cards;
       }
     }
-
     public bool Folded
     {
       get
@@ -105,7 +75,13 @@ namespace PokerProject
         folded = value;
       }
     }
-
+    public int NumberOfCards
+    {
+      get
+      {
+        return numberOfCards;
+      }
+    }
     public int MomenteleInzet
     {
       get
@@ -117,47 +93,77 @@ namespace PokerProject
         momenteleInzet = value;
       }
     }
-        public int ChipsPersoon
-        {
+    public int ChipsPersoon
+    {
 
-            get
-            {
-                return startKapitaal;
-            }
-            set
-            {
-                startKapitaal = value;
-            }
-
-        }
-
-        public int StartKapitaal
-        {
-
-            get
-            {
-                return startKapitaal;
-            }
-            set
-            {
-                startKapitaal = value;
-            }
-
-        }
-
-        public int Kapitaal
-        {
-
-            get
-            {
-                return kapitaal;
-            }
-            set
-            {
-                kapitaal = value;
-            }
-
-        }
+      get
+      {
+        return startKapitaal;
+      }
+      set
+      {
+        startKapitaal = value;
+      }
 
     }
+    public int StartKapitaal
+    {
+
+      get
+      {
+        return startKapitaal;
+      }
+      set
+      {
+        startKapitaal = value;
+      }
+
+    }
+    public int Kapitaal
+    {
+
+      get
+      {
+        return kapitaal;
+      }
+      set
+      {
+        kapitaal = value;
+      }
+
+    }
+    public string Name
+    {
+      get
+      {
+        return name;
+      }
+      set
+      {
+        name = value;
+      }
+    }
+    public string Special
+    {
+      get
+      {
+        return special;
+      }
+      set
+      {
+        special = value;
+      }
+    }
+    public bool Current
+    {
+      get
+      {
+        return current;
+      }
+      set
+      {
+        current = value;
+      }
+    }
+  }
 }

@@ -24,16 +24,21 @@ namespace PokerProject
       updateView();
     }
 
+    public cardController getControllerCard()
+    {
+      return _controller;
+    }
+
     public void updateView()
     {
       string cardName;
-      if (_model.ShowCard)
-      {
-        cardName = _model.CardKind + _model.CardValue;
-      }
-      else if (_controller.getControllerPlayer().getModelPlayer().Folded)
+      if (_controller.getControllerPlayer().getModelPlayer().Folded)
       {
         cardName = "fold";
+      }
+      else if (_model.ShowCard)
+      {
+        cardName = _model.CardKind + _model.CardValue;
       }
       else
       {
@@ -41,11 +46,6 @@ namespace PokerProject
       }
       cardPicture.ImageLocation = _model.CardsPath + cardName + _model.CardsExtension;
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
-    }
-
-    private void cardPicture_Click(object sender, EventArgs e)
-    {
-
     }
   }
 }

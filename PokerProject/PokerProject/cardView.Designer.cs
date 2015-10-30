@@ -39,7 +39,6 @@
       this.cardPicture.Size = new System.Drawing.Size(79, 123);
       this.cardPicture.TabIndex = 0;
       this.cardPicture.TabStop = false;
-      this.cardPicture.Click += new System.EventHandler(this.cardPicture_Click);
       // 
       // cardView
       // 
