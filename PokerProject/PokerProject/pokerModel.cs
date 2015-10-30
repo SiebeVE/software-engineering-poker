@@ -48,6 +48,12 @@ namespace PokerProject
       players.Add(player);
     }
 
+    public void deleteDeck()
+    {
+      cardsStackKind.Clear();
+      cardsStackValue.Clear();
+    }
+
     public void removeCardKind(int index)
     {
       cardsStackKind.RemoveAt(index);

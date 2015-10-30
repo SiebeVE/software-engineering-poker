@@ -236,12 +236,32 @@ namespace PokerProject
       //toon alle kaarten
       foreach (playerController player in _model.Players)
       {
-        foreach(cardView card in player.getCardsView())
+        foreach (cardView card in player.getCardsView())
         {
           card.getControllerCard().flipCard();
         }
       }
-      giveControllerWinner();
+      playerController winner = giveControllerWinner();
+      winner.getViewPlayer().updateBack(Color.Pink);
+      _model.View_button.updateToon();
+    }
+
+    public void newGame()
+    {
+      _model.deleteDeck();
+      makeDeck();
+      foreach (playerController player in _model.Players)
+      {
+        foreach (cardView card in player.getCardsView())
+        {
+          card.getControllerCard().flipCard();
+        }
+      }
+      foreach (cardView card in _model.FlopController.getCardsView())
+      {
+        card.getControllerCard().flipCard();
+      }
+
     }
 
     public playerController giveControllerWinner()
@@ -284,14 +304,14 @@ namespace PokerProject
         foreach (playerController player in bestPlayers)
         {
           int highestCard2 = 0;
-          foreach(cardView curCardView in player.getCardsView())
+          foreach (cardView curCardView in player.getCardsView())
           {
             int cardValue = curCardView.getControllerCard().getModelCard().CardValue;
             if (cardValue > highestCard2)
             {
               highestCard2 = cardValue;
             }
-            
+
           }
           arrHighestCard.Add(highestCard2);
         }
@@ -300,7 +320,7 @@ namespace PokerProject
         if (arrHighestCard.Distinct().Count() != arrHighestCard.Count)
         {
           //splitPot();
-          return null;
+          //return null;
         }
         int indexOfHighest = 0;
         int highestCard = 0;
@@ -316,6 +336,7 @@ namespace PokerProject
         }
         winner = bestPlayers[indexOfHighest];
       }
+      winner.getModelPlayer().Kapitaal += _model.FlopController.getModelPlayer().Kapitaal;
       return winner;
     }
 
@@ -432,7 +453,7 @@ namespace PokerProject
       int prevVal = 0;
       int numberOfPairs = 0;
       int numberOfSame = 1;
-      foreach(int value in values)
+      foreach (int value in values)
       {
         if (prevVal != value)
         {
@@ -460,9 +481,9 @@ namespace PokerProject
       values.Sort();
       int numberOfSameVal = 1;
       int prevVal = 0;
-      foreach(int value in values)
+      foreach (int value in values)
       {
-        if(prevVal != value)
+        if (prevVal != value)
         {
           numberOfSameVal = 1;
           prevVal = value;
@@ -547,9 +568,9 @@ namespace PokerProject
             //verwijder value van lijst
             List<int> newValues = new List<int>();
             //newValues.RemoveAll(v => v.Equals(prevVal));
-            foreach(int value2 in values)
+            foreach (int value2 in values)
             {
-              if(value2 != prevVal)
+              if (value2 != prevVal)
               {
                 newValues.Add(value2);
               }
@@ -592,7 +613,7 @@ namespace PokerProject
       List<int> sortedValues = new List<int>();
       List<string> sortedKinds = new List<string>();
       int teller = 0;
-      foreach(int value in values)
+      foreach (int value in values)
       {
         sortedValues.Add(value);
         sortedKinds.Add(kinds[teller]);
@@ -722,7 +743,7 @@ namespace PokerProject
           newMin = _model.BiggestBet - curInzet + 1;
         }
         _model.View_button.changeBoundriesRaise(newMin, newMax);
-        
+
       }
       /*if (_model.IndexCurrentPlayer == _model.IndexStopPlayer && !_model.FirstGame && !firstRound)
       {

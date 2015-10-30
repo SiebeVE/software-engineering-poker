@@ -93,7 +93,15 @@ namespace PokerProject
 
     private void showCards_Click(object sender, EventArgs e)
     {
-      omdraaienCardsHuidige();
+      if (showCards.Text == "Nieuwe hand")
+      {
+        showCards.Text = "Toon kaarten";
+        controller.getControllerPoker().newGame();
+      }
+      else
+      {
+        omdraaienCardsHuidige();
+      }
     }
 
     private void inzet_ValueChanged(object sender, EventArgs e)
@@ -143,6 +151,11 @@ namespace PokerProject
       {
         call_bttn.Text = "Call\r\n";
       }
+    }
+
+    public void updateToon()
+    {
+      showCards.Text = "Nieuwe hand";
     }
 
     public string getTextButton()
