@@ -42,9 +42,8 @@ namespace PokerProject
 
     private void call_bttn_Click(object sender, EventArgs e)
     {
-      controller.getControllerPoker().endGame();
-      /*omdraaienCardsHuidige();
-      controller.Call();*/
+      omdraaienCardsHuidige();
+      controller.Call();
     }
 
     private void fold_bttn_Click(object sender, EventArgs e)

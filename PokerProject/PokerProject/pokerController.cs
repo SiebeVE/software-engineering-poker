@@ -241,19 +241,85 @@ namespace PokerProject
           card.getControllerCard().flipCard();
         }
       }
-      giveIndexWinner();
+      giveControllerWinner();
     }
 
-    public void giveIndexWinner()
+    public playerController giveControllerWinner()
     {
       //rondgaan per speler wat hij/zij heeft
+      int[] scoresHand = new int[_model.NumberOfPlayers];
+      playerController[] arrPlayers = new playerController[_model.NumberOfPlayers];
+      int indexCur = 0;
       foreach (playerController player in _model.Players)
       {
-        checkHand(player);
+        arrPlayers[indexCur] = player;
+        scoresHand[indexCur] = checkHand(player);
+        indexCur++;
       }
+
+      //sorteer op hoogste scores
+      Array.Sort(scoresHand, arrPlayers);
+      Array.Reverse(arrPlayers);
+      Array.Reverse(scoresHand);
+      //enkel lijst van spelers overhouden met hoogste scores
+      int hoogsteScore = scoresHand[0];
+      int tellerIndex = 0;
+      List<playerController> bestPlayers = new List<playerController>();
+      foreach (int score in scoresHand)
+      {
+        if (score == hoogsteScore)
+        {
+          bestPlayers.Add(arrPlayers[tellerIndex]);
+        }
+        tellerIndex++;
+      }
+      playerController winner = bestPlayers[0];
+      if (bestPlayers.Count == 1)
+      {
+        winner = bestPlayers[0];
+      }
+      else
+      {
+        List<int> arrHighestCard = new List<int>();
+        foreach (playerController player in bestPlayers)
+        {
+          int highestCard2 = 0;
+          foreach(cardView curCardView in player.getCardsView())
+          {
+            int cardValue = curCardView.getControllerCard().getModelCard().CardValue;
+            if (cardValue > highestCard2)
+            {
+              highestCard2 = cardValue;
+            }
+            
+          }
+          arrHighestCard.Add(highestCard2);
+        }
+        int test = arrHighestCard.Distinct().Count();
+        IEnumerable<int> newVal = arrHighestCard.Distinct();
+        if (arrHighestCard.Distinct().Count() != arrHighestCard.Count)
+        {
+          //splitPot();
+          return null;
+        }
+        int indexOfHighest = 0;
+        int highestCard = 0;
+        int indexCurPlay = 0;
+        foreach (int highestCardPlayer in arrHighestCard)
+        {
+          if (highestCardPlayer > highestCard)
+          {
+            highestCard = highestCardPlayer;
+            indexOfHighest = indexCurPlay;
+          }
+          indexCurPlay++;
+        }
+        winner = bestPlayers[indexOfHighest];
+      }
+      return winner;
     }
 
-    public void checkHand(playerController curPlayer)
+    public int checkHand(playerController curPlayer)
     {
       //ophalen kaarten flop
       List<cardView> cardsFlop = _model.FlopController.getCardsView();
@@ -276,12 +342,12 @@ namespace PokerProject
         valueAllCards.Add(cardValue);
         kindAllCards.Add(cardKind);
       }
-      int valueCombo = checkAllPossible(valueAllCards, kindAllCards);
+      return checkAllPossible(valueAllCards, kindAllCards);
     }
 
     public int checkAllPossible(List<int> values, List<string> kinds)
     {
-      int value = 0;
+      int value;
       int royalFlush = checkRoyalFlush(values, kinds);
       int straightFlush = checkStraightFlush(values, kinds);
       int fourOfAKind = checkFourOfAKind(values);
@@ -291,6 +357,48 @@ namespace PokerProject
       int threeOfAKind = checkThreeOfAKind(values);
       int twoPair = checkTwoPair(values);
       int pair = checkPair(values);
+
+      if (royalFlush == 1)
+      {
+        value = 10;
+      }
+      else if (straightFlush == 1)
+      {
+        value = 9;
+      }
+      else if (fourOfAKind == 1)
+      {
+        value = 8;
+      }
+      else if (fullHouse == 1)
+      {
+        value = 7;
+      }
+      else if (flush == 1)
+      {
+        value = 6;
+      }
+      else if (straight == 1)
+      {
+        value = 5;
+      }
+      else if (threeOfAKind == 1)
+      {
+        value = 4;
+      }
+      else if (twoPair == 1)
+      {
+        value = 3;
+      }
+      else if (pair == 1)
+      {
+        value = 2;
+      }
+      else
+      {
+        //high card
+        value = 1;
+      }
       return value;
     }
 
@@ -304,10 +412,9 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkTwoPair(List<int> values)
     {
-      if (values.Count - values.Distinct().Count() == 2)
+      /*if (values.Count - values.Distinct().Count() == 2)
       {
         //exact 2 paar
         if (checkThreeOfAKind(values) == 1)
@@ -319,10 +426,35 @@ namespace PokerProject
         {
           return 1;
         }
+      }*/
+      //ff checken of er toch geen drie paar zijn
+      values.Sort();
+      int prevVal = 0;
+      int numberOfPairs = 0;
+      int numberOfSame = 1;
+      foreach(int value in values)
+      {
+        if (prevVal != value)
+        {
+          numberOfSame = 1;
+          prevVal = value;
+        }
+        else
+        {
+          numberOfSame++;
+          if (numberOfSame == 2)
+          {
+            numberOfSame = 1;
+            numberOfPairs++;
+          }
+        }
+      }
+      if (numberOfPairs >= 2)
+      {
+        return 1;
       }
       return 0;
     }
-
     public int checkThreeOfAKind(List<int> values)
     {
       values.Sort();
@@ -346,7 +478,6 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkStraight(List<int> values)
     {
       values.Sort();
@@ -373,7 +504,6 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkFlush(List<string> kinds)
     {
       kinds.Sort();
@@ -397,7 +527,6 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkFullHouse(List<int> values)
     {
       values.Sort();
@@ -425,7 +554,7 @@ namespace PokerProject
                 newValues.Add(value2);
               }
             }
-            if (checkPair(newValues) == 1)
+            if (checkPair(newValues) == 1 || checkThreeOfAKind(newValues) == 1)
             {
               return 1;
             }
@@ -434,7 +563,6 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkFourOfAKind(List<int> values)
     {
       values.Sort();
@@ -458,7 +586,6 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkStraightFlush(List<int> values, List<string> kinds)
     {
       //nieuwe lijsten aanmaken zodat apart lijst gesorteerd kan worden en link tss lijsten behouden blijft
@@ -507,7 +634,6 @@ namespace PokerProject
       }
       return 0;
     }
-
     public int checkRoyalFlush(List<int> values, List<string> kinds)
     {
       List<int> sortedValues = new List<int>();

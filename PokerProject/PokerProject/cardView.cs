@@ -42,7 +42,7 @@ namespace PokerProject
       }
       else
       {
-        cardName = _model.CardKind + _model.CardValue;
+        cardName = "back";
       }
       cardPicture.ImageLocation = _model.CardsPath + cardName + _model.CardsExtension;
       cardPicture.SizeMode = PictureBoxSizeMode.AutoSize;
