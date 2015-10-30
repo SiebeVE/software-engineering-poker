@@ -22,6 +22,10 @@ namespace PokerProject
     private int bigBlind;
 
     private int biggestBet;
+    private int indexStopPlayer;
+    private bool firstGame;
+    private bool firstRoundOfHand;
+    private int round = 1;
     
     private buttonsView view_button;
 
@@ -158,6 +162,50 @@ namespace PokerProject
       set
       {
         biggestBet = value;
+      }
+    }
+    public int IndexStopPlayer
+    {
+      get
+      {
+        return indexStopPlayer;
+      }
+      set
+      {
+        indexStopPlayer = value;
+      }
+    }
+    public bool FirstRoundOfHand
+    {
+      get
+      {
+        return firstRoundOfHand;
+      }
+      set
+      {
+        firstRoundOfHand = value;
+      }
+    }
+    public bool FirstGame
+    {
+      get
+      {
+        return firstGame;
+      }
+      set
+      {
+        firstGame = value;
+      }
+    }
+    public int Round
+    {
+      get
+      {
+        return round;
+      }
+      set
+      {
+        round = value;
       }
     }
   }

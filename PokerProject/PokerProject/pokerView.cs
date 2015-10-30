@@ -50,17 +50,17 @@ namespace PokerProject
         }
         players_rightOrder.Insert(curIndexAtPlace, player.getControllerPlayer());
       }
-      /*int curPlayerIndex2 = 0;
+      int curPlayerIndex2 = 0;
       foreach (playerController player in players_rightOrder)
       {
         curPlayerIndex2++;
         player.getModelPlayer().Name = "Speler: "+ curPlayerIndex2;
         player.getViewPlayer().updateName();
-      }*/
-      players_rightOrder[0].getModelPlayer().Special = "big";
-      _controller.getModelPoker().IndexCurrentPlayer = 0;
-      players_rightOrder[1].getModelPlayer().Special = "small";
+      }
+      players_rightOrder[0].getModelPlayer().Special = "small";
+      players_rightOrder[1].getModelPlayer().Special = "big";
       _controller.getModelPoker().Players = players_rightOrder;
+      _controller.getModelPoker().IndexStopPlayer = 0;
 
       //toevoegen view van flop, turn, river, total pot
       playerController flop = new playerController(_controller, 5);
@@ -70,8 +70,10 @@ namespace PokerProject
       Controls.Add(flopView);
       flopView.updateKapitaal();
 
+      _controller.makeCurrent(1);
+      _controller.getModelPoker().FirstGame = true;
+      _controller.getModelPoker().FirstRoundOfHand = false;
       
-      _controller.makeCurrent(0);
     }
   }
 }

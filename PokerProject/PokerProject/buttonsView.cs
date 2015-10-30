@@ -77,7 +77,7 @@ namespace PokerProject
       //terug omdraaien van enable knoppen
       toggleDisable();
       //ophalen controller huidige speler
-      playerController curPlayerController = controller.getControllerPoker().getModelPoker().Players[controller.getControllerPoker().getModelPoker().IndexCurrentPlayer];
+      playerController curPlayerController = controller.getControllerPoker().getModelPoker().getCurrentPlayer();
       //tonen kaarten van huidige speler
       List<cardView> kaarten = curPlayerController.getCardsView();
       foreach (cardView kaart in kaarten)
@@ -89,6 +89,32 @@ namespace PokerProject
     private void showCards_Click(object sender, EventArgs e)
     {
       omdraaienCardsHuidige();
+    }
+
+    private void inzet_ValueChanged(object sender, EventArgs e)
+    {
+      if (!(inzet.Value % 1 == 0))
+      {
+        //getal is decimaal, afronden
+        inzet.Value = Math.Round(inzet.Value);
+      }
+    }
+
+    public void toggleCheck()
+    {
+      if (call_bttn.Text == "Call\r\n")
+      {
+        call_bttn.Text = "Check\r\n";
+      }
+      else
+      {
+        call_bttn.Text = "Call\r\n";
+      }
+    }
+
+    public string getTextButton()
+    {
+      return call_bttn.Text;
     }
   }
 }

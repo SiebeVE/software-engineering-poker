@@ -31,9 +31,10 @@
       this.call_bttn = new System.Windows.Forms.Button();
       this.fold_bttn = new System.Windows.Forms.Button();
       this.raise_bttn = new System.Windows.Forms.Button();
-      this.inzet = new System.Windows.Forms.TextBox();
       this.showCards = new System.Windows.Forms.Button();
       this.currentPlayer = new System.Windows.Forms.Label();
+      this.inzet = new System.Windows.Forms.NumericUpDown();
+      ((System.ComponentModel.ISupportInitialize)(this.inzet)).BeginInit();
       this.SuspendLayout();
       // 
       // call_bttn
@@ -66,13 +67,6 @@
       this.raise_bttn.UseVisualStyleBackColor = true;
       this.raise_bttn.Click += new System.EventHandler(this.raise_Click);
       // 
-      // inzet
-      // 
-      this.inzet.Location = new System.Drawing.Point(294, 2);
-      this.inzet.Name = "inzet";
-      this.inzet.Size = new System.Drawing.Size(58, 20);
-      this.inzet.TabIndex = 5;
-      // 
       // showCards
       // 
       this.showCards.Enabled = false;
@@ -93,20 +87,44 @@
       this.currentPlayer.TabIndex = 4;
       this.currentPlayer.Text = "label1";
       // 
+      // inzet
+      // 
+      this.inzet.Location = new System.Drawing.Point(294, 4);
+      this.inzet.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+      this.inzet.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.inzet.Name = "inzet";
+      this.inzet.Size = new System.Drawing.Size(68, 20);
+      this.inzet.TabIndex = 7;
+      this.inzet.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.inzet.ValueChanged += new System.EventHandler(this.inzet_ValueChanged);
+      // 
       // buttonsView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-      this.Controls.Add(this.showCards);
       this.Controls.Add(this.inzet);
+      this.Controls.Add(this.showCards);
       this.Controls.Add(this.currentPlayer);
       this.Controls.Add(this.raise_bttn);
       this.Controls.Add(this.fold_bttn);
       this.Controls.Add(this.call_bttn);
       this.Name = "buttonsView";
-      this.Size = new System.Drawing.Size(465, 41);
+      this.Size = new System.Drawing.Size(465, 43);
       this.Load += new System.EventHandler(this.buttonView_Load);
+      ((System.ComponentModel.ISupportInitialize)(this.inzet)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -117,8 +135,8 @@
         private System.Windows.Forms.Button call_bttn;
         private System.Windows.Forms.Button fold_bttn;
         private System.Windows.Forms.Button raise_bttn;
-    private System.Windows.Forms.TextBox inzet;
     private System.Windows.Forms.Button showCards;
     private System.Windows.Forms.Label currentPlayer;
+    private System.Windows.Forms.NumericUpDown inzet;
   }
 }

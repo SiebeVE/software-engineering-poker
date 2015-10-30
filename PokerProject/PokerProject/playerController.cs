@@ -63,5 +63,23 @@ namespace PokerProject
         card.getViewCard().updateView(); //view update van de kaart
       }
     }
+
+    public void zetIn(int nieuweInzet)
+    {
+      //huidige speler ophalen
+      playerController huidigeSpeler = _controllerPoker.getModelPoker().getCurrentPlayer();
+      //ophalen van huidige inzet
+      int huidigeInzet = huidigeSpeler.getModelPlayer().MomenteleInzet;
+      //berekenen van verschil tussen grootste bet en huige ingezet
+      int verschilHuidig = nieuweInzet - huidigeInzet;
+      //verschil verminderen van kapitaal en nieuwe inzet voor speler + totaalpot
+      huidigeSpeler.getModelPlayer().MomenteleInzet += verschilHuidig;
+      huidigeSpeler.getModelPlayer().Kapitaal -= verschilHuidig;
+      _controllerPoker.getModelPoker().FlopController.getModelPlayer().Kapitaal += verschilHuidig;
+      //updaten van view speler en flop
+      huidigeSpeler.getViewPlayer().updateKapitaal();
+      huidigeSpeler.getViewPlayer().updateCurInzet();
+      _controllerPoker.getModelPoker().FlopController.getViewPlayer().updateKapitaal();
+    }
   }
 }
