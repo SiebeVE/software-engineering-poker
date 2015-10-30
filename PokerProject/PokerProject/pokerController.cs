@@ -283,7 +283,11 @@ namespace PokerProject
     {
       int value = 0;
       value = checkRoyalFlush(values, kinds);
-      int street = checkStreet(values);
+      int straightFlush = checkStraightFlush
+      int fourOfAKind = checkFourOfAKind(values);
+      int fullHouse = checkFullHouse(values);
+      int flush = checkFlush(kinds);
+      int straight = checkStraight(values);
       int threeOfAKind = checkThreeOfAKind(values);
       int twoPair = checkTwoPair(values);
       int pair = checkPair(values);
@@ -319,7 +323,31 @@ namespace PokerProject
       return 0;
     }
 
-    public int checkStreet(List<int> values)
+    public int checkThreeOfAKind(List<int> values)
+    {
+      values.Sort();
+      int numberOfSameVal = 1;
+      int prevVal = 0;
+      foreach(int value in values)
+      {
+        if(prevVal != value)
+        {
+          numberOfSameVal = 1;
+          prevVal = value;
+        }
+        else
+        {
+          numberOfSameVal++;
+          if (numberOfSameVal == 3)
+          {
+            return 1;
+          }
+        }
+      }
+      return 0;
+    }
+
+    public int checkStraight(List<int> values)
     {
       values.Sort();
       int numberOfSameVal = 1;
@@ -346,14 +374,38 @@ namespace PokerProject
       return 0;
     }
 
-    public int checkThreeOfAKind(List<int> values)
+    public int checkFlush(List<string> kinds)
+    {
+      kinds.Sort();
+      int numberOfSameKind = 1;
+      string prevKind = "";
+      foreach (string kind in kinds)
+      {
+        if (prevKind != kind)
+        {
+          numberOfSameKind = 1;
+          prevKind = kind;
+        }
+        else
+        {
+          numberOfSameKind++;
+          if (numberOfSameKind == 5)
+          {
+            return 1;
+          }
+        }
+      }
+      return 0;
+    }
+
+    public int checkFullHouse(List<int> values)
     {
       values.Sort();
       int numberOfSameVal = 1;
       int prevVal = 0;
-      foreach(int value in values)
+      foreach (int value in values)
       {
-        if(prevVal != value)
+        if (prevVal != value)
         {
           numberOfSameVal = 1;
           prevVal = value;
@@ -362,6 +414,43 @@ namespace PokerProject
         {
           numberOfSameVal++;
           if (numberOfSameVal == 3)
+          {
+            //verwijder value van lijst
+            List<int> newValues = new List<int>();
+            //newValues.RemoveAll(v => v.Equals(prevVal));
+            foreach(int value2 in values)
+            {
+              if(value2 != prevVal)
+              {
+                newValues.Add(value2);
+              }
+            }
+            if (checkPair(newValues) == 1)
+            {
+              return 1;
+            }
+          }
+        }
+      }
+      return 0;
+    }
+
+    public int checkFourOfAKind(List<int> values)
+    {
+      values.Sort();
+      int numberOfSameVal = 1;
+      int prevVal = 0;
+      foreach (int value in values)
+      {
+        if (prevVal != value)
+        {
+          numberOfSameVal = 1;
+          prevVal = value;
+        }
+        else
+        {
+          numberOfSameVal++;
+          if (numberOfSameVal == 4)
           {
             return 1;
           }
